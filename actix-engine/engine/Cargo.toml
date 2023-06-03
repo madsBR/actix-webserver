@@ -1,0 +1,17 @@
+[package]
+name = "engine"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-web = "4.*"
+image = "*"
+reqwest = { version = "*", features = ["json"] }
+tokio = { version = "*", features = ["full"] }
+actix-files = "*"
+serde = "*"
+async-trait = "*"
+app_plugin = { path = "../app_plugin" }
+homepage = { path = "../../homepage" }
