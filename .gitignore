@@ -1,0 +1,10 @@
+*.bin
+*.o
+*.lock
+*.jpg
+*.jpeg
+*.png
+*.svg
+*.save
+**/target/*
+perf.*
