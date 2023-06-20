@@ -1,5 +1,0 @@
-<tr class="row" style="background-color: {{ bg_color}}; color: {{font_color}}">
-    <td>{{ name }}</td>
-    <td>{{ good }}</td>
-    <td>{{ price }}</td>
-</tr>

@@ -1,5 +1,0 @@
-{
-    "rust-analyzer.linkedProjects": [
-        "./vcg_app/Cargo.toml"
-    ]
-}
