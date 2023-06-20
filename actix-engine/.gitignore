@@ -1,0 +1,8 @@
+*.bin
+*.o
+*.lock
+*.jpg
+*.jpeg
+*.png
+*.save
+**/target/*

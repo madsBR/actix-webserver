@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="static/styles/styles.css">
+</head>
+<body>
+  <h1>Dropdown Menu Example</h1>
+  <label for="selectN">Number Of Players:</label>  
+
+  <select id="selectN">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4" selected>4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+  </select>
+  </div>
+ <div id="nameContainer" class="free-text"> 
+    <label for="name">Enter your name:</label>  
+    <input type="text" id="name" name="name" required minlength="1" maxlength="40" size="10" oninput="validateInput(this)">
+    <span id="error-msg" style="color: red;"></span>    
+</div>
+
+  <div id="rowContainer"></div>
+  
+    <div>
+      <button id="submitBids" type="button">Submit bids</button> 
+    </div>
+    <script type="module" src="static/js/helpers.js"></script>
+    <script type="module" src="static/js/objects.js"></script>
+    <script type="module" src="static/js/script.js"></script>
+</body>
+</html>

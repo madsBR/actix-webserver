@@ -1,0 +1,26 @@
+[package]
+name = "vcg_app"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+app_plugin = {path="../actix-engine/app_plugin"}
+actix-web = "4.*"
+image = "*"
+reqwest = { version = "*", features = ["json"] }
+tokio = { version = "*", features = ["full"] }
+actix-files = "*"
+async-trait = "*"
+serde = {version = "*", features = ["derive"]}
+vcg_auction = { git = "https://github.com/madsBR/vcg_auction", branch = "ver2"}
+tinyvec = {version = "*",features = ['alloc','rustc_1_40','serde']}
+fastrand = "2.0.0"
+ndarray = "*"
+askama = "*"
+serde_json = "*"
+env_logger ="*"
+log  = "*"
+regex = "*"
+lazy_static = "*"
