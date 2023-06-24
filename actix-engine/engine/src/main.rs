@@ -14,7 +14,6 @@ fn build_log(){
     builder.target(Target::Stdout);
     builder.init();
 }
-//   let path: PathBuf = "static/templates/menu.html".parse().unwrap();
     
 //    let dirs = path:: 
 
