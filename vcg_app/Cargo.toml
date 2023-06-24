@@ -14,7 +14,7 @@ tokio = { version = "*", features = ["full"] }
 actix-files = "*"
 async-trait = "*"
 serde = {version = "*", features = ["derive"]}
-vcg_auction = { git = "https://github.com/madsBR/vcg_auction", branch = "ver2"}
+vcg_auction = { path="./sub_crates/vcg_auction"}
 tinyvec = {version = "*",features = ['alloc','rustc_1_40','serde']}
 fastrand = "2.0.0"
 ndarray = "*"

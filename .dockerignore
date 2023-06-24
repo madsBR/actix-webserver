@@ -2,5 +2,5 @@
 *.o
 *.lock
 *.save
-target/*
-**/vscode
+**/target/
+**/.vscode/

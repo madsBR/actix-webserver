@@ -7,7 +7,6 @@ use regex::Regex;
 use lazy_static::lazy_static;
 use serde_json::Value;
 
-
 fn is_valid_hexadecimal(input: &str) -> bool {
     lazy_static! {
         static ref RE: Regex = Regex::new(r"^(#)?[0-9a-fA-F]+$").unwrap();
