@@ -10,15 +10,17 @@ export function PlayerObj(id, name) {
   this.name = name;
 }
 
-  
+
+export const NULL_GOOD = new GoodObj(6,'none','#FFFFFF')
+
 export const goods = [
-    new GoodObj(0,'none','#FFFFFF'),
+    new GoodObj(0,'Firaks','#808B96'),
     new GoodObj(1,'Ivits','#FF0000'),
     new GoodObj(2,'Terran','#0000FF'),
     new GoodObj(3,'Xenon','#FFFF00'),
     new GoodObj(4,'Geoden','#F39c12'),
     new GoodObj(5,'Itars','#FFFFFF'),
-    new GoodObj(6,'Firaks','#808B96'),
-];
+    NULL_GOOD
+  ];
 
-
+export const NULL_GOOD_INDEX = goods.length-1; 

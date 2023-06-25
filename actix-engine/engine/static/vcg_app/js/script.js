@@ -1,11 +1,12 @@
-import { toggleOption, validateInput, colorCodeToInteger, integerToColorCode, getPushBackUrl ,createRow, clearRow} from './helpers.js';
-import { GoodObj, PlayerObj, goods } from './objects.js';
+import { toggleOption, validateInput, colorCodeToInteger, integerToColorCode, getPushBackUrl ,createRow, clearRow, has_null_good_selected} from './helpers.js';
+import { GoodObj, PlayerObj, goods,NULL_GOOD } from './objects.js';
+
 
 
 document.addEventListener('DOMContentLoaded', function() {
 
   
-  let nr_submitted = 0;
+  var nr_submitted = 0;
   const selectN = document.getElementById('selectN');
   const rowContainer = document.getElementById('rowContainer');
   var content = {
@@ -20,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
   selectN.addEventListener('change', function() {
     var confirmed;
     if ( nr_submitted >0){
-      this.value = this.dataset.previousValue;
       confirmed = confirm('Are you sure you want to change number of players? Bids will be reset');
     } else{
       confirmed = true;
@@ -35,21 +35,29 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       reset()
     }
+    else{
+      this.value = this.dataset.previousValue;      
+    }
   });
   
   const submitBtn= document.getElementById('submitBids');  
   submitBtn.onclick = function(){
     if (nr_submitted == 0){content.player_nr = parseInt(selectN.value);}
     var nameInput = document.getElementById("name");
-    console.log("captured the following input" + nameInput.value);
+    //checks
+    
+    if(!validateInput(nameInput)){
+      document.getElementById("submit-error-msg").textContent = "name is invalid";
+    } else{
+    document.getElementById("submit-error-msg").textContent = "";
     content.pls.push(new PlayerObj(nr_submitted,nameInput.value));
-    console.log("captured the following input" + content.pls[content.pls.length-1].name);
     const rows = rowContainer.getElementsByClassName('row');
     for (let i = 0; i < selectN.value; i++) {
       const row = rows[i];
       const dropdown = row.querySelector('select');
-      const good_id = dropdown.options[dropdown.selectedIndex].dataset.good_id
-      if (good_id > 0){        
+      if (!has_null_good_selected(dropdown)){
+        const good_id = dropdown.options[dropdown.selectedIndex].dataset.good_id
+        console.log("putting in. good id is " + good_id);
         const bid = document.getElementById('bidInput' + i).value;
         content.bid_pairings.push([parseInt(nr_submitted),parseInt(good_id),parseInt(bid)]);
       }
@@ -65,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
           headers: {
               'Content-Type': 'application/json'
           },
-          body: JSON.stringify(content)
+          body: JSON.stringify(content )
       })
       .then(response => response.text())
       .then(html => {
@@ -77,12 +85,15 @@ document.addEventListener('DOMContentLoaded', function() {
           console.error('Error:', error);
           // Handle errors
       });
+    } else{
+      clearRow(rowContainer.getElementsByClassName('row'));
+      document.getElementById("name").value="";
     }
 
     //console.log("content bid pairings:" + content.bid_pairings.toString());
+  }  
   }
   selectN.dispatchEvent(new Event('change'));
-
   function reset(){
     nr_submitted = 0;
     content = {
@@ -93,9 +104,11 @@ document.addEventListener('DOMContentLoaded', function() {
       bid_pairings : [],
     } 
     clearRow(rowContainer.getElementsByClassName('row'));
-    nameInput.value="";
+    document.getElementById("name").value="";
   }
-  });
+  
+
+});
 
 
 
