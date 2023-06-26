@@ -1,14 +1,18 @@
-use vcg_auction::vcg_base_types::{Price,Good,Player, VCGOutput,Pairing, GoodWPrice};
-use serde::{Deserialize,Serialize,Deserializer, ser::SerializeStruct};
-use std::{time::{Instant,Duration}, fmt::Display, vec};
+
+use vcg_auction::vcg_base_types::{Price,Good,Player, Pairing, GoodWPrice};
+use serde::{Deserialize,Serialize,Deserializer};
+use std::fmt::Display;
 use tinyvec::TinyVec;
 use std::fmt::Debug;
 use regex::Regex;
 use lazy_static::lazy_static;
-use serde_json::Value;
+
+
+
 
 fn is_valid_hexadecimal(input: &str) -> bool {
     lazy_static! {
+        
         static ref RE: Regex = Regex::new(r"^(#)?[0-9a-fA-F]+$").unwrap();
     }    
     RE.is_match(input)
@@ -164,9 +168,25 @@ pub struct BidPostBackContent {
     pub player_nr : u64,
     pub pls : TinyVec<[PlayerExt;5]>,
     pub goods : TinyVec<[GoodExt;10]>,
-    pub bid_pairings: Vec<(usize,usize,usize)>,
+    pub bid_pairings: Vec<(usize,Option<usize>,usize)>,
 }
 
+impl BidPostBackContent {
+    pub fn parse_good(good_ind : Option<usize>) -> Option<Good>{
+        match good_ind {
+            None => None,
+            Some(x) => Some(Good{val : x})
+        }
+    }
+    pub fn parse_player(pl_ind : usize) -> Player { Player { val: pl_ind }}
+    pub fn parse_pr(price : usize) -> Price{ Price { val: price }}
+    pub fn parse_bid_pairing( bid_pairing : (usize,Option<usize>,usize) ) -> Option<(Player,Good,Price)>{
+        match Self::parse_good(bid_pairing.1){
+            Some(good) => Some((Self::parse_player(bid_pairing.0),good,Self::parse_pr(bid_pairing.2))),
+            None => None 
+        }        
+    }
+}
 
 pub struct ContentMetaData{
     pub players : TinyVec<[PlayerExt;5]>,
@@ -175,8 +195,8 @@ pub struct ContentMetaData{
 
 impl ContentMetaData{
     pub fn from_content(content : &BidPostBackContent) -> Self{
-        let mut players = TinyVec::<[PlayerExt;5]>::from_iter(content.pls.iter().cloned());
-        let mut goods = TinyVec::<[GoodExt;10]>::from_iter(content.goods.iter().cloned());
+        let players = TinyVec::<[PlayerExt;5]>::from_iter(content.pls.iter().cloned());
+        let goods = TinyVec::<[GoodExt;10]>::from_iter(content.goods.iter().cloned());
         Self { players: players, goods: goods }
     }
     #[inline]

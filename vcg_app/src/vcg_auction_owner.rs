@@ -1,4 +1,4 @@
-use ndarray::{Array1,Array2};
+use ndarray::{Array2};
 use vcg_auction::vcg_auction::VCG_Auction;
 use vcg_auction::vcg_base_types::VCGOutput;
 pub struct VCG_Auction_Owner{

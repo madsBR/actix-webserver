@@ -13,7 +13,7 @@ use crate::vcg_auction_routine::{self, vcg_routine};
 use serde::{Deserialize,Serialize};
 use vcg_auction::vcg_base_types::{VCGOutput, Pairing};
 use vcg_auction_routine::{ClientBidInfo,VCGOutputContent};
-use log::{debug,log, error, log_enabled,info};
+use log::{debug,log};
 use std::env;
 use env_logger::{Builder, Target};
 use regex::Regex;
@@ -40,8 +40,6 @@ async fn index() -> impl Responder {
 #[post("/index/submit_bids")]
 async fn submit_bids(content : String) -> impl Responder {
     debug!("recieved stuff {:?}",content);
-
-
     let content: BidPostBackContent = serde_json::from_str(&content).unwrap();
     let resp_content = vcg_routine(content);
     let page_result = VCGResultTemplate::from(&resp_content).render();

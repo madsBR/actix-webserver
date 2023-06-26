@@ -6,7 +6,7 @@ use app_plugin::AppPlugin;
 use async_trait::async_trait;
 use homepage::HPConfig;
 use vcg_app::VcgAppConfig;
-use log::{debug, error, log_enabled,info,log};
+use log::{log_enabled,info};
 use std::env;
 use env_logger::{Builder, Target};
 fn build_log(){

@@ -1,5 +1,5 @@
 use actix_web::{get, web, App, HttpServer, Responder};
-use serde::{Deserialize,Serialize, ser::SerializeStruct};
+use serde::{Deserialize,Serialize};
 use std::{time::{Instant,Duration}, fmt::Display, vec};
 use std::fmt::Debug;
 use vcg_auction::vcg_base_types::{Price,Good,Player, VCGOutput,Pairing, GoodWPrice};
@@ -49,7 +49,7 @@ impl From<BidPostBackContent> for ClientBidInfo{
         
         ClientBidInfo { 
             id: content.id.unwrap_or_else(ID::new_random),
-            bid_buffer: bid_buffer.iter().map(|(pl,good,pr)| ((*pl).into(),(*good).into(),(*pr).into())).collect(),
+            bid_buffer: bid_buffer.into_iter().filter_map(|bid_pairing| BidPostBackContent::parse_bid_pairing(bid_pairing)).collect(),
             created_at: instant,
             metadata : metadata,
         }
@@ -103,7 +103,7 @@ mod tests {
     use vcg_auction::vcg_base_types::Pairing;
     use crate::{vcg_auction_routine::{OutputPairing, GoodWPriceExt, PlayerExt,Color}, ext_types::GoodExt};
 
-    use super::{VCGOutputContent, ID,Serialize,SerializeStruct};
+    use super::{VCGOutputContent, ID,Serialize};
     #[test]
     fn it_works() {
         let x = Pairing::new(5.into(), 3.into(), 2.into());
