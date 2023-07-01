@@ -12,3 +12,4 @@ reqwest = { version = "*", features = ["json"] }
 tokio = { version = "*", features = ["full"] }
 actix-files = "*"
 serde = "*"
+log4s = "*"

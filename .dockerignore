@@ -4,3 +4,5 @@
 *.save
 **/target/
 **/.vscode/
+**.log
+.github/**

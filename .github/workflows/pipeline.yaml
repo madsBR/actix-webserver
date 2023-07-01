@@ -17,9 +17,7 @@ jobs:
 
           DOCKER_USR: ${{ secrets.DOCKER_USR }}
         run: |
-          # Short name for current branch. For PRs, use target branch (base ref)
-          GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
-          echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV          
+          echo "${{ github.ref_name }}" 
         
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
@@ -33,3 +31,4 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USR }}/homepage:latest
           file: Dockerfile
+          build-args: BRANCH=${{ github.ref_name }}

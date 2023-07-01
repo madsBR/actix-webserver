@@ -8,3 +8,6 @@ edition = "2021"
 [dependencies]
 async-trait = "*"
 actix-web = "4.*"
+env_logger = "*"
+log = "*"
+log4rs = "*"

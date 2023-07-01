@@ -13,13 +13,12 @@ use crate::vcg_auction_routine::{self, vcg_routine};
 use serde::{Deserialize,Serialize};
 use vcg_auction::vcg_base_types::{VCGOutput, Pairing};
 use vcg_auction_routine::{ClientBidInfo,VCGOutputContent};
-use log::{debug,log};
 use std::env;
-use env_logger::{Builder, Target};
 use regex::Regex;
 use crate::result_page::{VCGResultTemplate};
 use askama::Template;
 use askama::Error as AskaErr;
+use log::debug;
 pub struct VcgAppConfig{}
 
 
@@ -30,6 +29,7 @@ async fn index() -> impl Responder {
     let mut  file_content = NamedFile::open(path).ok().unwrap();
     let mut buffer = String::new();
     file_content.read_to_string(&mut buffer).ok();
+    
     HttpResponse::Ok().body(buffer)
 }
 
@@ -39,14 +39,16 @@ async fn index() -> impl Responder {
 
 #[post("/index/submit_bids")]
 async fn submit_bids(content : String) -> impl Responder {
-    debug!("recieved stuff {:?}",content);
     let content: BidPostBackContent = serde_json::from_str(&content).unwrap();
+    log::debug!("received bids {:?}",content);
     let resp_content = vcg_routine(content);
     let page_result = VCGResultTemplate::from(&resp_content).render();
-    match page_result{
-    Ok(page) => HttpResponse::Ok().body(page),
+    let response = match page_result{
+     Ok(page) => HttpResponse::Ok().body(page),
     _ => HttpResponse::InternalServerError().into(),
-    }
+    };
+    log::debug!("responding {:?}",response);
+    response
 }
 
 
@@ -64,7 +66,6 @@ impl AppPlugin for VcgAppConfig {
     const SCOPE : &'static str = "vcg_app";
     async fn scheduled_process(&self){}
     fn config(cfg : &mut ServiceConfig ){
-        debug!("serving {} files from ./static/{}",Self::SCOPE ,Self::SCOPE);
         cfg
         .service(fs::Files::new("/static/styles", format!("./static/{}/styles",Self::SCOPE))
         .show_files_listing()

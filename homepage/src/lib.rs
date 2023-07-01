@@ -25,7 +25,6 @@ async fn index() -> impl Responder {
 
 // this function could be located in a different module
 fn config1(cfg: &mut web::ServiceConfig) {
-    println!("serving from ./static/{}/styles",HOMEPAGE);
     cfg.service(fs::Files::new("/static/styles", format!("./static/{}/styles",HOMEPAGE))
                 .show_files_listing()
                 .use_last_modified(true)

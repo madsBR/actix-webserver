@@ -1,6 +1,9 @@
 use std::marker::PhantomData;
 use async_trait::async_trait; //should be temporary until async fn is stable
 use actix_web::web::{Data, ServiceConfig,scope};
+pub mod logger;
+
+
 
 
 #[async_trait] // Should be temporary until async fn is stable
