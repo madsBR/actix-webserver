@@ -1,0 +1,26 @@
+2023-07-01T12:45:18.419870915+02:00 INFO engine - Initializing web server
+2023-07-01T12:45:18.437306457+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-01T12:45:18.437334820+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-01T12:45:18.437352281+02:00 TRACE actix_server::worker - starting server worker 0
+2023-07-01T12:45:18.437511824+02:00 TRACE mio::poll - registering event source with poller: token=Token(2147483649), interests=READABLE
+2023-07-01T12:45:18.437829568+02:00 TRACE actix_server::worker - service "actix-web-service-0.0.0.0:8080" is available
+2023-07-01T12:45:18.437852027+02:00 TRACE actix_server::worker - starting server worker 1
+2023-07-01T12:45:18.437966735+02:00 TRACE mio::poll - registering event source with poller: token=Token(2147483649), interests=READABLE
+2023-07-01T12:45:18.438224306+02:00 TRACE actix_server::worker - service "actix-web-service-0.0.0.0:8080" is available
+2023-07-01T12:45:18.438251268+02:00 TRACE actix_server::worker - starting server worker 2
+2023-07-01T12:45:18.438368234+02:00 TRACE mio::poll - registering event source with poller: token=Token(2147483649), interests=READABLE
+2023-07-01T12:45:18.438622876+02:00 TRACE actix_server::worker - service "actix-web-service-0.0.0.0:8080" is available
+2023-07-01T12:45:18.438649698+02:00 TRACE actix_server::worker - starting server worker 3
+2023-07-01T12:45:18.438766507+02:00 TRACE mio::poll - registering event source with poller: token=Token(2147483649), interests=READABLE
+2023-07-01T12:45:18.438924659+02:00 TRACE mio::poll - registering event source with poller: token=Token(0), interests=READABLE
+2023-07-01T12:45:18.438933525+02:00 TRACE actix_server::worker - service "actix-web-service-0.0.0.0:8080" is available
+2023-07-01T12:45:18.438956859+02:00 TRACE actix_server::signals - setting up OS signal listener
+2023-07-01T12:45:52.229803227+02:00 TRACE actix_server::signals - SIGINT received
+2023-07-01T12:45:52.229912548+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-01T12:45:52.230004450+02:00 TRACE mio::poll - deregistering event source from poller
+2023-07-01T12:45:52.230180469+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-01T12:45:52.230261139+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-01T12:45:52.230524182+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-01T12:45:52.230561681+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-01T12:45:52.230738152+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-01T12:45:52.231038541+02:00 INFO actix_server::worker - shutting down idle worker

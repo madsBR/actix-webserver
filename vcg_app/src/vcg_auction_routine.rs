@@ -46,7 +46,6 @@ impl From<BidPostBackContent> for ClientBidInfo{
         let metadata = ContentMetaData::from_content(&content);
         let instant = Instant::now();
         let bid_buffer = content.bid_pairings;
-        
         ClientBidInfo { 
             id: content.id.unwrap_or_else(ID::new_random),
             bid_buffer: bid_buffer.into_iter().filter_map(|bid_pairing| BidPostBackContent::parse_bid_pairing(bid_pairing)).collect(),

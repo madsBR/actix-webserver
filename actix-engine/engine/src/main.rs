@@ -9,11 +9,7 @@ use vcg_app::VcgAppConfig;
 use log::{log_enabled,info};
 use std::env;
 use env_logger::{Builder, Target};
-fn build_log(){
-    let mut builder = Builder::from_default_env();
-    builder.target(Target::Stdout);
-    builder.init();
-}
+use app_plugin::logger::configure_log;
     
 //    let dirs = path:: 
 
@@ -39,8 +35,7 @@ async fn ping() -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {    
-
-    build_log();
+    configure_log();
     info!("Initializing web server");
     HttpServer::new(|| {
         App::new()
