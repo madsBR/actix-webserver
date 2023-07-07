@@ -24,3 +24,295 @@
 2023-07-01T12:45:52.230561681+02:00 INFO actix_server::accept - accept thread stopped
 2023-07-01T12:45:52.230738152+02:00 INFO actix_server::worker - shutting down idle worker
 2023-07-01T12:45:52.231038541+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-01T17:27:24.148211916+02:00 INFO engine - Initializing web server
+2023-07-01T17:27:24.166039875+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-01T17:27:24.166082948+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-01T17:29:34.996193115+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-01T17:29:34.996398623+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-01T17:29:34.996652780+02:00 INFO actix_server::worker - force shutdown worker, closing 1 connections
+2023-07-01T17:29:34.996914326+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-01T17:29:34.997576421+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-01T17:29:34.997796947+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-01T17:29:34.998010329+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-01T17:29:40.959872663+02:00 INFO engine - Initializing web server
+2023-07-01T17:29:40.977331543+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-01T17:29:40.977360377+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-01T23:18:37.875022695+02:00 INFO engine - Initializing web server
+2023-07-01T23:18:37.899449429+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-01T23:18:37.899481684+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T00:44:58.428591937+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T00:44:58.428792621+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T00:44:58.429083326+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:44:58.429279806+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:44:58.429517806+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:44:58.429814102+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:44:58.430048836+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T00:45:04.511940100+02:00 INFO engine - Initializing web server
+2023-07-02T00:45:04.535366490+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T00:45:04.535398385+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T00:49:43.158042387+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T00:49:43.158231578+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:49:43.158488112+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:49:43.158694450+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:49:43.158970723+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T00:49:43.159192165+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T00:49:43.159247117+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:49:49.120510829+02:00 INFO engine - Initializing web server
+2023-07-02T00:49:49.159234305+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T00:49:49.159268713+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T00:50:20.428709294+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T00:50:20.428894048+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T00:50:20.429124203+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:50:20.429327343+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:50:20.429577204+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:50:20.429829205+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:50:20.430057664+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T00:50:28.571364260+02:00 INFO engine - Initializing web server
+2023-07-02T00:50:28.591437680+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T00:50:28.591469517+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T00:50:52.464407265+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T00:50:52.464608479+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T00:50:52.464894395+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:50:52.465087867+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:50:52.465429371+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T00:50:52.465518426+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:50:52.465713083+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:50:58.248560416+02:00 INFO engine - Initializing web server
+2023-07-02T00:50:58.271301336+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T00:50:58.271330756+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T00:52:44.759041620+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T00:52:44.759242911+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T00:52:44.759537110+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:52:44.759757801+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:52:44.759947674+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:52:44.760261270+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T00:52:44.760348393+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:52:50.688362408+02:00 INFO engine - Initializing web server
+2023-07-02T00:52:50.711414110+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T00:52:50.711443819+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T00:53:32.141683440+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T00:53:32.141900676+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T00:53:32.142153319+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:53:32.142547081+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:53:32.142746488+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:53:32.142988666+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:53:32.143228474+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T00:53:37.910771217+02:00 INFO engine - Initializing web server
+2023-07-02T00:53:37.947245631+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T00:53:37.947280375+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T00:56:04.307436895+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T00:56:04.307657624+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:56:04.307950623+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:56:04.308190371+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:56:04.308551708+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T00:56:04.308766440+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T00:56:04.308963561+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T00:56:10.101326032+02:00 INFO engine - Initializing web server
+2023-07-02T00:56:10.123302739+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T00:56:10.123335983+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T01:01:03.946947104+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T01:01:03.947028146+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T01:01:03.947119965+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T01:01:03.947179174+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T01:01:03.947265324+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T01:01:03.947341554+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T01:01:03.947540112+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T01:01:10.559484425+02:00 INFO engine - Initializing web server
+2023-07-02T01:01:10.583424325+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T01:01:10.583466259+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T01:07:21.912964548+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T01:07:21.913140758+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T01:07:21.913367635+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T01:07:21.913586513+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T01:07:21.913814409+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T01:07:21.914067383+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T01:07:21.914272081+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T01:07:28.231501735+02:00 INFO engine - Initializing web server
+2023-07-02T01:07:28.251366529+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T01:07:28.251394970+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T01:16:05.762262084+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T01:16:05.762447920+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T01:16:05.762666291+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T01:16:05.762890346+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T01:16:05.763102653+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T01:16:05.763293784+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T01:16:05.763501496+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T01:28:15.527858032+02:00 INFO engine - Initializing web server
+2023-07-02T01:28:15.551376903+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T01:28:15.551403703+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T01:31:57.730058811+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T01:31:57.730289444+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T01:31:57.730526726+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T01:31:57.730737824+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T01:31:57.730783199+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T01:31:57.730996838+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T01:31:57.732281581+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:11:27.488507833+02:00 INFO engine - Initializing web server
+2023-07-02T02:11:27.507404180+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T02:11:27.507438696+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T02:13:32.827486723+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T02:13:32.827680762+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:13:32.827921373+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T02:13:32.828107822+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:13:32.828437317+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:13:32.828592035+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:13:32.828911091+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T02:13:39.092655024+02:00 INFO engine - Initializing web server
+2023-07-02T02:13:39.131168620+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T02:13:39.131193428+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T02:19:18.595595657+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T02:19:18.595798607+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T02:19:18.596044185+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:19:18.596261141+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:19:18.596462215+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:19:18.596749661+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:19:18.596958291+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T02:19:26.113364085+02:00 INFO engine - Initializing web server
+2023-07-02T02:19:26.135305412+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T02:19:26.135343568+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T02:19:29.130428825+02:00 DEBUG actix_files::service - error handling /vcg_app/static/imgs/rustlogo.png: No such file or directory (os error 2)
+2023-07-02T02:19:29.130789766+02:00 DEBUG actix_files::service - error handling /vcg_app/static/imgs/actix-logo.png: No such file or directory (os error 2)
+2023-07-02T02:19:39.757148949+02:00 DEBUG actix_files::service - error handling /vcg_app/static/imgs/rustlogo.png: No such file or directory (os error 2)
+2023-07-02T02:19:39.757545362+02:00 DEBUG actix_files::service - error handling /vcg_app/static/imgs/actix-logo.png: No such file or directory (os error 2)
+2023-07-02T02:21:30.695021153+02:00 DEBUG actix_files::service - error handling /vcg_app/static/imgs/rustlogo.png: No such file or directory (os error 2)
+2023-07-02T02:21:30.695402219+02:00 DEBUG actix_files::service - error handling /vcg_app/static/imgs/actix-logo.png: No such file or directory (os error 2)
+2023-07-02T02:25:17.747184828+02:00 DEBUG actix_files::service - error handling /vcg_app/static/imgs/rustlogo.png: No such file or directory (os error 2)
+2023-07-02T02:25:17.747224396+02:00 DEBUG actix_files::service - error handling /vcg_app/static/imgs/actix-logo.png: No such file or directory (os error 2)
+2023-07-02T02:27:46.559182220+02:00 DEBUG actix_files::service - error handling /vcg_app/static/imgs/rustlogo.png: No such file or directory (os error 2)
+2023-07-02T02:27:46.559249578+02:00 DEBUG actix_files::service - error handling /vcg_app/static/imgs/actix-logo.png: No such file or directory (os error 2)
+2023-07-02T02:28:00.506401754+02:00 DEBUG actix_files::service - error handling /vcg_app/static/imgs/rustlogo.png: No such file or directory (os error 2)
+2023-07-02T02:28:00.507002830+02:00 DEBUG actix_files::service - error handling /vcg_app/static/imgs/actix-logo.png: No such file or directory (os error 2)
+2023-07-02T02:28:08.364386714+02:00 DEBUG actix_files::service - error handling /homepage/static/imgs/rustlogo.png: No such file or directory (os error 2)
+2023-07-02T02:28:08.364897462+02:00 DEBUG actix_files::service - error handling /homepage/static/imgs/actix-logo.png: No such file or directory (os error 2)
+2023-07-02T02:28:29.705069607+02:00 DEBUG actix_files::service - error handling /homepage/static/imgs/rustlogo.png: No such file or directory (os error 2)
+2023-07-02T02:28:34.888257220+02:00 DEBUG actix_files::service - error handling /homepage/static/imgs/rust_logo.png: No such file or directory (os error 2)
+2023-07-02T02:28:42.864208231+02:00 DEBUG actix_files::service - error handling /homepage/static/imgs/rustlogo.png: No such file or directory (os error 2)
+2023-07-02T02:29:00.960994304+02:00 DEBUG actix_files::service - error handling /homepage/static/imgs/rustlogo.png: No such file or directory (os error 2)
+2023-07-02T02:29:06.313385687+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T02:29:06.313587591+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:29:06.313666162+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T02:29:06.313941459+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:29:06.314162315+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:29:06.314292927+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T02:29:06.314390870+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:29:16.103742693+02:00 INFO engine - Initializing web server
+2023-07-02T02:29:16.123380115+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T02:29:16.123409898+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T02:29:17.303961715+02:00 DEBUG actix_files::service - error handling /homepage/static/imgs/rustlogo.png: No such file or directory (os error 2)
+2023-07-02T02:30:39.915684637+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T02:30:39.915863926+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:30:39.915938867+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:30:39.916147166+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:30:39.916412181+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:30:39.916696558+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T02:30:39.916898669+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T02:30:47.324060699+02:00 INFO engine - Initializing web server
+2023-07-02T02:30:47.343418915+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T02:30:47.343453439+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T02:33:57.604731070+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T02:33:57.604948077+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T02:33:57.605218338+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:33:57.605435698+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:33:57.605649371+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:33:57.606149244+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:33:57.606328773+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T02:33:59.043964389+02:00 INFO engine - Initializing web server
+2023-07-02T02:33:59.063415531+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T02:33:59.063445332+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T02:35:05.158763059+02:00 DEBUG actix_files::service - error handling /vcg_app/static/styles/base.css: No such file or directory (os error 2)
+2023-07-02T02:35:05.164482458+02:00 DEBUG actix_files::service - error handling /vcg_app/static/imgs/rustlogo.png: No such file or directory (os error 2)
+2023-07-02T02:35:05.164551851+02:00 DEBUG actix_files::service - error handling /vcg_app/static/imgs/actix-logo.png: No such file or directory (os error 2)
+2023-07-02T02:35:05.204058007+02:00 DEBUG actix_files::service - error handling /vcg_app/static/styles/base.css: No such file or directory (os error 2)
+2023-07-02T02:35:05.205500329+02:00 DEBUG actix_files::service - error handling /vcg_app/static/imgs/rustlogo.png: No such file or directory (os error 2)
+2023-07-02T02:35:05.205526234+02:00 DEBUG actix_files::service - error handling /vcg_app/static/imgs/actix-logo.png: No such file or directory (os error 2)
+2023-07-02T02:35:33.047446859+02:00 DEBUG actix_files::service - error handling /homepage/static/styles/base.css: No such file or directory (os error 2)
+2023-07-02T02:35:33.054661523+02:00 DEBUG actix_files::service - error handling /homepage/static/styles/base.css: No such file or directory (os error 2)
+2023-07-02T02:35:36.120365257+02:00 DEBUG actix_files::service - error handling /homepage/static/styles/base.css: No such file or directory (os error 2)
+2023-07-02T02:35:36.130553335+02:00 DEBUG actix_files::service - error handling /homepage/static/styles/base.css: No such file or directory (os error 2)
+2023-07-02T02:35:56.388903946+02:00 DEBUG actix_files::service - error handling /homepage/static/imgs/rustlogo.png: No such file or directory (os error 2)
+2023-07-02T02:38:04.056789460+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T02:38:04.057028427+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T02:38:04.057274886+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:38:04.057433573+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:38:04.057541976+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:38:04.057639849+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T02:38:04.057891924+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:38:12.426208174+02:00 INFO engine - Initializing web server
+2023-07-02T02:38:12.443354972+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T02:38:12.443384684+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T02:38:12.443796487+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/base/js"
+2023-07-02T02:38:12.444331819+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/base/js"
+2023-07-02T02:38:12.444772882+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/base/js"
+2023-07-02T02:38:12.445144116+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/base/js"
+2023-07-02T02:38:24.248648661+02:00 DEBUG actix_files::service - error handling /vcg_app/static/styles/base.css: No such file or directory (os error 2)
+2023-07-02T02:38:24.253576807+02:00 DEBUG actix_files::service - error handling /vcg_app/static/styles/base.css: No such file or directory (os error 2)
+2023-07-02T02:38:24.291222374+02:00 DEBUG actix_files::service - error handling /vcg_app/static/imgs/rustlogo.png: No such file or directory (os error 2)
+2023-07-02T02:38:24.291249891+02:00 DEBUG actix_files::service - error handling /vcg_app/static/imgs/actix-logo.png: No such file or directory (os error 2)
+2023-07-02T02:43:35.003456511+02:00 DEBUG actix_files::service - error handling /vcg_app/static/styles/base.css: No such file or directory (os error 2)
+2023-07-02T02:43:35.004779963+02:00 DEBUG actix_files::service - error handling /vcg_app/static/imgs/rustlogo.png: No such file or directory (os error 2)
+2023-07-02T02:43:35.005007848+02:00 DEBUG actix_files::service - error handling /vcg_app/static/imgs/actix-logo.png: No such file or directory (os error 2)
+2023-07-02T02:43:35.007942609+02:00 DEBUG actix_files::service - error handling /vcg_app/static/styles/base.css: No such file or directory (os error 2)
+2023-07-02T02:45:06.525785113+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T02:45:06.525973577+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T02:45:06.526236823+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:45:06.526410918+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:45:06.526683490+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:45:06.526988520+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:45:06.527094537+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T02:45:14.066690788+02:00 INFO engine - Initializing web server
+2023-07-02T02:45:14.087432467+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T02:45:14.087463696+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T02:45:14.087866927+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/base/js"
+2023-07-02T02:45:14.088420663+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/base/js"
+2023-07-02T02:45:14.088914576+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/base/js"
+2023-07-02T02:45:14.089406370+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/base/js"
+2023-07-02T02:52:23.482665681+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T02:52:23.482848869+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:52:23.482984455+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T02:52:23.483178121+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T02:52:23.483242826+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:52:23.483348482+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:52:23.483517187+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:52:31.376663979+02:00 INFO engine - Initializing web server
+2023-07-02T02:52:31.399390075+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T02:52:31.399420299+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T02:53:25.105126590+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T02:53:25.105317794+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T02:53:25.105564359+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:53:25.105781694+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:53:25.106245779+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:53:25.106446535+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T02:53:25.106654282+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T02:53:33.287193355+02:00 INFO engine - Initializing web server
+2023-07-02T02:53:33.331156242+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T02:53:33.331189936+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T03:01:46.208712650+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T03:01:46.208921813+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T03:01:46.209152885+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T03:01:46.209410803+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T03:01:46.209735846+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T03:01:46.209976996+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T03:01:46.210182206+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T03:01:53.965711664+02:00 INFO engine - Initializing web server
+2023-07-02T03:01:53.966160855+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T03:01:53.966177179+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-02T03:02:37.611818247+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-02T03:02:37.612017031+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-02T03:02:37.612273699+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T03:02:37.612623360+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T03:02:37.613066237+02:00 INFO actix_server::worker - force shutdown worker, closing 1 connections
+2023-07-02T03:02:37.613303871+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-02T03:02:37.613760646+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-02T03:05:06.048834658+02:00 INFO engine - Initializing web server
+2023-07-02T03:05:06.071462726+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-02T03:05:06.071507141+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-07T23:38:32.756887684+02:00 INFO engine - Initializing web server
+2023-07-07T23:38:32.774446009+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-07T23:38:32.774465796+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-07T23:39:46.663752309+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-07T23:39:46.663952279+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-07T23:39:46.664116896+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-07T23:39:46.664286593+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-07T23:39:46.664482555+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-07T23:39:46.664538316+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-07T23:39:46.664734549+02:00 INFO actix_server::worker - shutting down idle worker

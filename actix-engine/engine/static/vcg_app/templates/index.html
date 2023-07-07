@@ -1,10 +1,12 @@
+{% extends "frame.html" %}
 <!DOCTYPE html>
-<html>
-<head>
+
+
+{% block title %}VCG Auction{% endblock %}
+{% block head %}
   <link rel="stylesheet" type="text/css" href="static/styles/styles.css">
-</head>
-<body>
-  <h1>Dropdown Menu Example</h1>
+{% endblock %}  
+{% block content %}
   <label for="selectN">Number Of Players:</label>  
 
   <select id="selectN">
@@ -32,5 +34,5 @@
   <script type="module" src="static/js/helpers.js"></script>
   <script type="module" src="static/js/objects.js"></script>
   <script type="module" src="static/js/script.js"></script>
-</body>
-</html>
+
+{% endblock %}

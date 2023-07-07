@@ -95,6 +95,11 @@ fn config1(cfg: &mut web::ServiceConfig) {
             fs::Files::new("/static/templates", format!("./{}/static/templates",test_scope))
             .show_files_listing()
             .use_last_modified(true))
+            .service(
+                fs::Files::new("/static/templates", format!("./{}/static/imgs","base"))
+                .show_files_listing()
+                .use_last_modified(true))
+    
         .service(
             fs::Files::new("/static/imgs", format!("./{}/static/imgs",test_scope))
             .show_files_listing()

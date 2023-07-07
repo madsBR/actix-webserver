@@ -19,18 +19,20 @@ use crate::result_page::{VCGResultTemplate};
 use askama::Template;
 use askama::Error as AskaErr;
 use log::debug;
+use crate::index_template::IndexTemplate;
+
 pub struct VcgAppConfig{}
 
 
 
 #[get("/index")]
 async fn index() -> impl Responder {
-    let path: PathBuf = format!("static/{}/templates/index.html",VcgAppConfig::SCOPE).into();
-    let mut  file_content = NamedFile::open(path).ok().unwrap();
-    let mut buffer = String::new();
-    file_content.read_to_string(&mut buffer).ok();
-    
-    HttpResponse::Ok().body(buffer)
+    let page = IndexTemplate::new().render();
+    let response = match page{
+     Ok(page) => HttpResponse::Ok().body(page),
+    _ => HttpResponse::InternalServerError().into(),
+    };
+    response
 }
 
 
@@ -67,16 +69,6 @@ impl AppPlugin for VcgAppConfig {
     async fn scheduled_process(&self){}
     fn config(cfg : &mut ServiceConfig ){
         cfg
-        .service(fs::Files::new("/static/styles", format!("./static/{}/styles",Self::SCOPE))
-        .show_files_listing()
-        .use_last_modified(true))
-        .service(
-        fs::Files::new("/static/templates", format!("./static/{}/templates",Self::SCOPE))
-        .show_files_listing()
-        .use_last_modified(true))
-        .service(fs::Files::new("/static/js", format!("./static/{}/js",Self::SCOPE))
-        .show_files_listing()
-        .use_last_modified(true))
         .service(ping)
         .service(index)
         .service(submit_bids)

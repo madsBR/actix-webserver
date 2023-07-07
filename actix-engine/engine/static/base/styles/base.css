@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+    
+  .bottom-images {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: auto;
+    padding: 20px;
+  }
+  
+  .bottom-images .text {
+    margin-bottom: 10px;
+  }
+  
+  .bottom-images .images {
+    display: flex; /* Added */
+    justify-content: center; /* Added */
+  }
+  
+  .bottom-images img {
+    width: 200px;
+    margin: 10px;
+  }

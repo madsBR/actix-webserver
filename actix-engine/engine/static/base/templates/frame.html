@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{{ title }} - My Site{% endblock %}</title>
+        {% block head %}{% endblock %}
+        <link rel="stylesheet" type="text/css" href="static/base_styles/base.css">
+    </head>
+    <body class="container">
+        {% block content %}{% endblock %}
+
+        <div class="bottom-images">
+            <div class="text">
+                <p>Powered By</p>
+            </div>    
+            <div class="images">
+                <a href="https://www.rust-lang.org/"> 
+                    <img src="static/base_imgs/rustlogo.png" alt="Image 2">
+                </a>
+                <a href="https://actix.rs/"> 
+                    <img src="static/base_imgs/actix-logo.png" alt="Image 1">
+                </a>            
+            </div>
+        </div>
+    </body>
+</html>
+

@@ -40,9 +40,9 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .service(web::scope(HPConfig::SCOPE)
-                .configure(HPConfig::config)
+                .configure(HPConfig::config_w_files)
             ).service(web::scope(VcgAppConfig::SCOPE)
-            .configure(VcgAppConfig::config)
+            .configure(VcgAppConfig::config_w_files)
         )
 
     })

@@ -10,3 +10,4 @@ app_plugin = { path = "../actix-engine/app_plugin"}
 actix-web = "4.*"
 actix-files = "*"
 async-trait = "*"
+askama = "*"
