@@ -1,11 +1,12 @@
-<!doctype html>
-<html>
-  <head>
+{% extends "frame.html" %}
+
+
+{% block title %}  Mads Bonde Raad &sdot; Project Statistician{% endblock %}
+{% block head %}
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, minimal-ui">
 
-  <title>Mads Bonde Raad &sdot; Project Statistician and Data Scientist</title>
 
   <style>
   /*===========================================================
@@ -444,8 +445,8 @@ section {
 
   </style>
 
-  </head>
-  <body>
+{% endblock %}  
+{% block content %}
 
   <div id="resume">
       <section id="basics">
@@ -672,5 +673,5 @@ section {
     Powered by <a href="https://jsonresume.org" target="_blank">JSON Resume</a> &sdot;
     Theme by <a href="https://github.com/assimovt">Tair Assimov</a>
   </div>
-  </body>
-</html>
+{% endblock %}
+

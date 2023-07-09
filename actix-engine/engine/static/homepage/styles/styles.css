@@ -51,3 +51,32 @@
     width: 200px;
     margin: 10px;
   }
+
+  
+
+
+
+
+
+  .family-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .family-text {
+    flex: 1;
+    text-align: left;
+    max-width: 25%; /* Adjust the width as needed */
+    margin-right: 4px;
+  }
+  
+  .family-image {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .family-image img {
+    max-width: 100%;
+    max-height: 100%;
+  }
