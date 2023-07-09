@@ -10,7 +10,7 @@ pub struct CVTemplate {
 }
 
 impl CVTemplate{
-    pub fn new(&) -> Self{
-        CVTemplate{}
+    pub fn new(scope : &'static str) -> Self{
+        CVTemplate{ scope : scope}
     }
 }

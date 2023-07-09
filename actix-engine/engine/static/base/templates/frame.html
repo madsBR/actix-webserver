@@ -3,7 +3,7 @@
     <head>
         <title>{% block title %}{{ title }} - My Site{% endblock %}</title>
         {% block head %}{% endblock %}
-        <link rel="stylesheet" type="text/css" href="/static/base_styles/base.css">
+        <link rel="stylesheet" type="text/css" href="/{{scope}}/static/base_styles/base.css">
     </head>
     <body class="container">
         {% block content %}{% endblock %}
@@ -17,7 +17,7 @@
                     <img src="/{{ scope }}/static/base_imgs/rustlogo.png" alt="Image 2">
                 </a>
                 <a href="https://actix.rs/"> 
-                    <img src="{{ scope }}/static/base_imgs/actix-logo.png" alt="Image 1">
+                    <img src="/{{ scope }}/static/base_imgs/actix-logo.png" alt="Image 1">
                 </a>            
             </div>
         </div>

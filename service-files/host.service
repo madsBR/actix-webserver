@@ -7,7 +7,7 @@ After=network.target
 Type=simple
 Restart=always
 User=website-host
-ExecStart=/home/website-host/service/svc.sh
+ExecStart=/home/website-host/service/docker-run-cmd.sh
 
 
 [Install]

@@ -10,14 +10,12 @@ ENV BRANCH=${branch}
 RUN cargo build --release
 FROM debian:bookworm-slim as runtime
 
-COPY --from=builder /actix-engine/target/release /app
-COPY actix-engine/engine/static /app/static
 WORKDIR /app
 
-RUN groupadd host && useradd -m -g host host && chmod -R 744 ./ && chown -R host:host ./
-
 EXPOSE 8080
-
+RUN useradd -ms /bin/bash host && mkdir -p /app && chown -R host:host /app && chmod -R 744 /app
 USER host
+COPY --from=builder --chown=host:host /actix-engine/target/release /app
+COPY --from=builder --chown=host:host /actix-engine/engine/static /app/static
 
 ENTRYPOINT ["/bin/bash","-c","./engine"]

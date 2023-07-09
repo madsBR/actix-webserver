@@ -12,11 +12,12 @@ use askama::Template;
 use askama::Error as AskaErr;
 
 
+const SCOPE : &str = "homepage";
 
 
-#[get("/intro")]
+#[get("/home")]
 async fn front_page() -> impl Responder {
-    let page = HPTemplate::new().render();
+    let page = HPTemplate::new(SCOPE).render();
 //    let page : Result<&str,usize> = Ok("hej");
     let response = match page{
      Ok(page) => HttpResponse::Ok().body(page),
@@ -28,7 +29,7 @@ async fn front_page() -> impl Responder {
 
 #[get("/resume")]
 async fn resume() -> impl Responder {
-    let page = CVTemplate::new().render();
+    let page = CVTemplate::new(SCOPE).render();
 //    let page : Result<&str,usize> = Ok("hej");
     let response = match page{
      Ok(page) => HttpResponse::Ok().body(page),
@@ -44,14 +45,14 @@ pub struct HPConfig{}
 
 #[async_trait]
 impl AppPlugin for HPConfig {
-    const SCOPE : &'static str = "homepage";
+    const SCOPE : &'static str = SCOPE;
     async fn scheduled_process(&self){}
     fn config(cfg: &mut ServiceConfig){
         cfg
-        .service(web::redirect("/index",format!("/intro")))
 //        .service(web::redirect("/index",format!("/{}/",Self::SCOPE)))
-//        .service(web::redirect("",format!("/{}/index",Self::SCOPE)))
         .service(front_page)
+        .service(web::redirect("/index",format!("/{}/home",Self::SCOPE)))
+        .service(web::redirect("/",format!("/{}/home",Self::SCOPE)))
         .service(resume)
         ;
     }

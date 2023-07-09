@@ -21,13 +21,14 @@ use askama::Error as AskaErr;
 use log::debug;
 use crate::index_template::IndexTemplate;
 
-pub struct VcgAppConfig{}
 
+const SCOPE : &'static str = "vcg_app";
+pub struct VcgAppConfig{}
 
 
 #[get("/index")]
 async fn index() -> impl Responder {
-    let page = IndexTemplate::new().render();
+    let page = IndexTemplate::new(SCOPE).render();
     let response = match page{
      Ok(page) => HttpResponse::Ok().body(page),
     _ => HttpResponse::InternalServerError().into(),
@@ -65,7 +66,7 @@ async fn ping() -> impl Responder {
 #[async_trait]
 impl AppPlugin for VcgAppConfig {
     
-    const SCOPE : &'static str = "vcg_app";
+    const SCOPE : &'static str = SCOPE;
     async fn scheduled_process(&self){}
     fn config(cfg : &mut ServiceConfig ){
         cfg

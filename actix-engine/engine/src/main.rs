@@ -42,13 +42,14 @@ async fn main() -> std::io::Result<()> {
     info!("Initializing web server");
     HttpServer::new(|| {
         App::new()
-        .wrap(mw::NormalizePath::new(mw::TrailingSlash::Trim))
+//        .wrap(mw::NormalizePath::new(mw::TrailingSlash::Trim))
         .service(web::scope(format!("/{}",HPConfig::SCOPE).as_str())
             .configure(HPConfig::config_w_files)            
         )
         .service(web::scope(format!("/{}",VcgAppConfig::SCOPE).as_str())
             .configure(VcgAppConfig::config_w_files)
-        )   
+        )
+         
     })
     .bind(("0.0.0.0", 8080))?
     .run()
