@@ -13,7 +13,7 @@ tokio = { version = "*", features = ["full"] }
 actix-files = "*"
 serde = "*"
 async-trait = "*"
-app_plugin = { path = "../app_plugin" }
+app_plugin = { path = "../../app_plugin" }
 homepage = { path = "../../homepage" }
 vcg_app = { path = "../../vcg_app" }
 rand = "*"

@@ -1,16 +1,18 @@
 use actix_web::web::{Data, ServiceConfig,scope};
-use actix_web::{get,post, web::{self,ReqData, Json,Redirect,redirect}, App, HttpResponse, HttpServer, Responder};
+use actix_web::{middleware as mw,get,post, web::{self,ReqData, Json,Redirect,redirect}, App, HttpResponse, HttpServer, Responder};
 use image::{ImageFormat,load_from_memory_with_format};
 use actix_files as fs;
 use app_plugin::AppPlugin;
+
 use async_trait::async_trait;
 use homepage::HPConfig;
 use vcg_app::VcgAppConfig;
 use log::{log_enabled,info};
 use std::env;
+use std::fmt::format;
 use env_logger::{Builder, Target};
 use app_plugin::logger::configure_log;
-    
+
 //    let dirs = path:: 
 
 // async fn dl_euler_plate() -> std::io::Result<()>{
@@ -33,18 +35,20 @@ async fn ping() -> impl Responder {
 
 
 
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {    
     configure_log();
     info!("Initializing web server");
     HttpServer::new(|| {
         App::new()
-            .service(web::scope(HPConfig::SCOPE)
-                .configure(HPConfig::config_w_files)
-            ).service(web::scope(VcgAppConfig::SCOPE)
-            .configure(VcgAppConfig::config_w_files)
+        .wrap(mw::NormalizePath::new(mw::TrailingSlash::Trim))
+        .service(web::scope(format!("/{}",HPConfig::SCOPE).as_str())
+            .configure(HPConfig::config_w_files)            
         )
-
+        .service(web::scope(format!("/{}",VcgAppConfig::SCOPE).as_str())
+            .configure(VcgAppConfig::config_w_files)
+        )   
     })
     .bind(("0.0.0.0", 8080))?
     .run()

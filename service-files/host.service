@@ -1,0 +1,17 @@
+# Contents of /etc/systemd/system/myservice.service
+[Unit]
+Description=hosting webiste
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+User=website-host
+ExecStart=/home/website-host/service/svc.sh
+
+
+[Install]
+WantedBy=multi-user.target
+
+# it will run on boot after $systemctl enable host.service
+#it will run immediately for test after $systemctl start host.service
