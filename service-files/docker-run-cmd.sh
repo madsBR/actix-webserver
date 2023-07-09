@@ -1,7 +1,8 @@
 #!/bin/bash
-
+docker login -u madsbr1990
+docker pull madsbr1990/homepage:latest
 docker run \
 --name container \
---mount type=bind,source=./actix-engine/engine/log,target=/app/log \
+--mount type=bind,source=/home/website-host/log,target=/app/log \
 -p 80:8080 \
- homepage:latest
+ madsbr1990/homepage:latest
