@@ -1,0 +1,15 @@
+[package]
+name = "vcg_auction"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+doctest = false
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+ndarray = "*"
+itertools = "*"
+strum =  { version = "*", features = ["derive"] }
+rustc-hash ="*"
+serde = {version = "*", features = ["derive"]}
