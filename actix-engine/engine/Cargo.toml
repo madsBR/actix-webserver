@@ -15,7 +15,7 @@ serde = "*"
 async-trait = "*"
 app_plugin = { path = "../../app_plugin" }
 homepage = { path = "../../homepage" }
-vcg_app = { path = "../../vcg_app" }
+vcg = { path = "../../vcg" }
 rand = "*"
 env_logger = "*"
 log4rs = "*"

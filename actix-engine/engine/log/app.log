@@ -924,3 +924,192 @@
 2023-07-09T22:14:25.920390489+00:00 INFO engine - Initializing web server
 2023-07-09T22:14:25.940980724+00:00 INFO actix_server::builder - starting 4 workers
 2023-07-09T22:14:25.941097742+00:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-16T11:20:19.399263055+02:00 INFO engine - Initializing web server
+2023-07-16T11:20:19.421106580+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-16T11:20:19.421229665+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-16T11:24:05.681949252+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-16T11:24:05.682146734+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-16T11:24:05.682393635+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:24:05.682640547+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:24:05.683286120+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:24:05.683873123+02:00 INFO actix_server::worker - force shutdown worker, closing 1 connections
+2023-07-16T11:24:05.684050750+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-16T11:24:20.126113478+02:00 INFO engine - Initializing web server
+2023-07-16T11:24:20.142987595+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-16T11:24:20.143017864+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-16T11:24:24.029972304+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-16T11:24:24.030166281+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-16T11:24:24.032406410+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:24:24.032685874+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:24:24.032890215+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:24:24.033119244+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:24:24.033345416+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-16T11:25:44.707408529+02:00 INFO engine - Initializing web server
+2023-07-16T11:25:44.728527820+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-16T11:25:44.728638845+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-16T11:28:06.014981515+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-16T11:28:06.015200502+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-16T11:28:06.015441639+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:28:06.015597862+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:28:06.015829577+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:28:06.016026402+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-16T11:28:06.016379309+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:29:36.914352202+02:00 INFO engine - Initializing web server
+2023-07-16T11:29:36.931075986+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-16T11:29:36.931102234+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-16T11:32:15.690221022+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-16T11:32:15.690425071+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:32:15.690658845+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:32:15.690872411+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:32:15.691177552+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:32:15.691625357+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-16T11:32:15.691766342+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-16T11:32:21.708549304+02:00 INFO engine - Initializing web server
+2023-07-16T11:32:21.746865912+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-16T11:32:21.746914560+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-16T11:34:17.624229730+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-16T11:34:17.624436617+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:34:17.624656948+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-16T11:34:17.624859345+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-16T11:34:17.624926241+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:34:17.625705574+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:34:17.625920285+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:34:19.053705082+02:00 INFO engine - Initializing web server
+2023-07-16T11:34:19.091289212+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-16T11:34:19.091354799+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-16T11:55:49.274731703+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-16T11:55:49.274915399+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:55:49.275155180+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-16T11:55:49.275341694+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-16T11:55:49.275417693+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:55:49.275636123+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T11:55:49.275832079+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T12:12:51.590855010+02:00 INFO engine - Initializing web server
+2023-07-16T12:12:51.615092438+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-16T12:12:51.615118330+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-16T12:12:51.615404598+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/styles"
+2023-07-16T12:12:51.615444768+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/templates"
+2023-07-16T12:12:51.615454554+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/js"
+2023-07-16T12:12:51.615462736+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/imgs"
+2023-07-16T12:12:51.615980726+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/styles"
+2023-07-16T12:12:51.616016677+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/templates"
+2023-07-16T12:12:51.616026485+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/js"
+2023-07-16T12:12:51.616034927+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/imgs"
+2023-07-16T12:12:51.616595512+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/styles"
+2023-07-16T12:12:51.616634014+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/templates"
+2023-07-16T12:12:51.616644821+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/js"
+2023-07-16T12:12:51.616653867+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/imgs"
+2023-07-16T12:12:51.617091250+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/styles"
+2023-07-16T12:12:51.617127674+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/templates"
+2023-07-16T12:12:51.617138039+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/js"
+2023-07-16T12:12:51.617147224+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/imgs"
+2023-07-16T12:12:53.415401348+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-16T12:12:53.415596122+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T12:12:53.415717812+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T12:12:53.415778961+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-16T12:12:53.415980537+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-16T12:12:53.416217067+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T12:12:53.416290104+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T12:22:03.046749+02:00 INFO engine - Initializing web server
+2023-07-16T12:22:03.067018461+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-16T12:22:03.067051530+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-16T12:22:03.067458403+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/styles"
+2023-07-16T12:22:03.067498871+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/templates"
+2023-07-16T12:22:03.067514596+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/js"
+2023-07-16T12:22:03.067523311+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/imgs"
+2023-07-16T12:22:03.068153724+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/styles"
+2023-07-16T12:22:03.068189988+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/templates"
+2023-07-16T12:22:03.068200284+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/js"
+2023-07-16T12:22:03.068208771+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/imgs"
+2023-07-16T12:22:03.068742124+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/styles"
+2023-07-16T12:22:03.068778367+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/templates"
+2023-07-16T12:22:03.068788711+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/js"
+2023-07-16T12:22:03.068797226+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/imgs"
+2023-07-16T12:22:03.069311784+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/styles"
+2023-07-16T12:22:03.069346315+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/templates"
+2023-07-16T12:22:03.069356360+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/js"
+2023-07-16T12:22:03.069364800+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/imgs"
+2023-07-16T12:29:20.793148487+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-16T12:29:20.793278937+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T12:29:20.793355680+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T12:29:20.793415701+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-16T12:29:20.793552894+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-16T12:29:20.793598529+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T12:29:20.793662672+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T12:29:35.924719132+02:00 INFO engine - Initializing web server
+2023-07-16T12:29:35.943207351+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-16T12:29:35.943249886+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-16T12:29:35.950191775+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/styles"
+2023-07-16T12:29:35.950242519+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/templates"
+2023-07-16T12:29:35.950254264+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/js"
+2023-07-16T12:29:35.950264735+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/imgs"
+2023-07-16T12:29:35.950815091+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/styles"
+2023-07-16T12:29:35.950852795+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/templates"
+2023-07-16T12:29:35.950862870+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/js"
+2023-07-16T12:29:35.950871244+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/imgs"
+2023-07-16T12:29:35.951286361+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/styles"
+2023-07-16T12:29:35.951320491+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/templates"
+2023-07-16T12:29:35.951330277+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/js"
+2023-07-16T12:29:35.951338351+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/imgs"
+2023-07-16T12:29:35.951687537+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/styles"
+2023-07-16T12:29:35.951727451+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/templates"
+2023-07-16T12:29:35.951737400+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/js"
+2023-07-16T12:29:35.951745601+02:00 ERROR actix_files::files - Specified path is not a directory: "./static/vcg/imgs"
+2023-07-16T12:30:17.460329758+02:00 DEBUG actix_files::service - error handling /vcg/static/styles/styles.css: No such file or directory (os error 2)
+2023-07-16T12:30:17.461096556+02:00 DEBUG actix_files::service - error handling /vcg/static/js/objects.js: No such file or directory (os error 2)
+2023-07-16T12:30:17.461461757+02:00 DEBUG actix_files::service - error handling /vcg/static/js/script.js: No such file or directory (os error 2)
+2023-07-16T12:30:17.461556668+02:00 DEBUG actix_files::service - error handling /vcg/static/js/helpers.js: No such file or directory (os error 2)
+2023-07-16T12:30:17.501389521+02:00 DEBUG actix_files::service - error handling /vcg/static/styles/styles.css: No such file or directory (os error 2)
+2023-07-16T12:30:29.797119501+02:00 DEBUG actix_files::service - error handling /vcg/static/js/helpers.js: No such file or directory (os error 2)
+2023-07-16T12:30:29.797705345+02:00 DEBUG actix_files::service - error handling /vcg/static/js/objects.js: No such file or directory (os error 2)
+2023-07-16T12:30:29.797775280+02:00 DEBUG actix_files::service - error handling /vcg/static/styles/styles.css: No such file or directory (os error 2)
+2023-07-16T12:30:29.797908567+02:00 DEBUG actix_files::service - error handling /vcg/static/js/script.js: No such file or directory (os error 2)
+2023-07-16T12:30:29.802958340+02:00 DEBUG actix_files::service - error handling /vcg/static/styles/styles.css: No such file or directory (os error 2)
+2023-07-16T12:30:30.936543531+02:00 DEBUG actix_files::service - error handling /vcg/static/styles/styles.css: No such file or directory (os error 2)
+2023-07-16T12:30:30.936618824+02:00 DEBUG actix_files::service - error handling /vcg/static/js/helpers.js: No such file or directory (os error 2)
+2023-07-16T12:30:30.936781747+02:00 DEBUG actix_files::service - error handling /vcg/static/js/objects.js: No such file or directory (os error 2)
+2023-07-16T12:30:30.936928389+02:00 DEBUG actix_files::service - error handling /vcg/static/js/script.js: No such file or directory (os error 2)
+2023-07-16T12:30:30.942063281+02:00 DEBUG actix_files::service - error handling /vcg/static/styles/styles.css: No such file or directory (os error 2)
+2023-07-16T12:30:42.114659346+02:00 DEBUG actix_files::service - error handling /vcg/static/js/helpers.js: No such file or directory (os error 2)
+2023-07-16T12:30:42.115065460+02:00 DEBUG actix_files::service - error handling /vcg/static/js/objects.js: No such file or directory (os error 2)
+2023-07-16T12:30:42.115226982+02:00 DEBUG actix_files::service - error handling /vcg/static/js/script.js: No such file or directory (os error 2)
+2023-07-16T12:30:42.116122473+02:00 DEBUG actix_files::service - error handling /vcg/static/styles/styles.css: No such file or directory (os error 2)
+2023-07-16T12:30:42.122056832+02:00 DEBUG actix_files::service - error handling /vcg/static/styles/styles.css: No such file or directory (os error 2)
+2023-07-16T12:32:21.120326134+02:00 DEBUG actix_files::service - error handling /vcg/static/js/helpers.js: No such file or directory (os error 2)
+2023-07-16T12:32:21.120881257+02:00 DEBUG actix_files::service - error handling /vcg/static/js/objects.js: No such file or directory (os error 2)
+2023-07-16T12:32:21.121017440+02:00 DEBUG actix_files::service - error handling /vcg/static/js/script.js: No such file or directory (os error 2)
+2023-07-16T12:32:21.121313395+02:00 DEBUG actix_files::service - error handling /vcg/static/styles/styles.css: No such file or directory (os error 2)
+2023-07-16T12:32:21.131043454+02:00 DEBUG actix_files::service - error handling /vcg/static/styles/styles.css: No such file or directory (os error 2)
+2023-07-16T12:32:25.170012019+02:00 DEBUG actix_files::service - error handling /vcg/static/styles/styles.css: No such file or directory (os error 2)
+2023-07-16T12:32:25.170060220+02:00 DEBUG actix_files::service - error handling /vcg/static/js/helpers.js: No such file or directory (os error 2)
+2023-07-16T12:32:25.170110825+02:00 DEBUG actix_files::service - error handling /vcg/static/js/objects.js: No such file or directory (os error 2)
+2023-07-16T12:32:25.170359379+02:00 DEBUG actix_files::service - error handling /vcg/static/js/script.js: No such file or directory (os error 2)
+2023-07-16T12:32:25.178241817+02:00 DEBUG actix_files::service - error handling /vcg/static/styles/styles.css: No such file or directory (os error 2)
+2023-07-16T12:32:31.856164367+02:00 DEBUG actix_files::service - error handling /vcg/static/js/helpers.js: No such file or directory (os error 2)
+2023-07-16T12:32:31.856607304+02:00 DEBUG actix_files::service - error handling /vcg/static/js/objects.js: No such file or directory (os error 2)
+2023-07-16T12:32:31.856656125+02:00 DEBUG actix_files::service - error handling /vcg/static/js/script.js: No such file or directory (os error 2)
+2023-07-16T12:32:31.857808821+02:00 DEBUG actix_files::service - error handling /vcg/static/styles/styles.css: No such file or directory (os error 2)
+2023-07-16T12:32:31.867068566+02:00 DEBUG actix_files::service - error handling /vcg/static/styles/styles.css: No such file or directory (os error 2)
+2023-07-16T12:32:39.129484945+02:00 DEBUG actix_files::service - error handling /vcg/static/js/helpers.js: No such file or directory (os error 2)
+2023-07-16T12:32:41.936594569+02:00 DEBUG actix_files::service - error handling /vcg/static/js/helpers.js: No such file or directory (os error 2)
+2023-07-16T12:32:43.918229942+02:00 DEBUG actix_files::service - error handling /vcg/static/js/helpers.js: No such file or directory (os error 2)
+2023-07-16T12:33:01.387337955+02:00 DEBUG actix_files::service - error handling /vcg/static/js: No such file or directory (os error 2)
+2023-07-16T12:33:04.118382270+02:00 DEBUG actix_files::service - error handling /vcg/static/js: No such file or directory (os error 2)
+2023-07-16T12:40:28.152685202+02:00 INFO engine - Initializing web server
+2023-07-16T12:40:36.488075818+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-16T12:40:36.488338398+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-16T12:40:36.488539149+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-16T12:40:36.488905744+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T12:40:36.489304473+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T12:40:36.489712937+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T12:40:36.490122603+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T12:40:39.793950739+02:00 INFO engine - Initializing web server
+2023-07-16T12:40:39.811201176+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-16T12:40:39.811240100+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-16T12:42:57.667849611+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-16T12:42:57.668056248+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-16T12:42:57.668312599+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T12:42:57.668533578+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T12:42:57.669108119+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-16T12:42:57.669643586+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-16T12:42:57.669736293+02:00 INFO actix_server::worker - shutting down idle worker
