@@ -13,6 +13,8 @@ use askama::Error as AskaErr;
 
 
 const SCOPE : &str = "homepage";
+const ROOT_REDIR : &str = "home";
+
 
 
 #[get("/home")]
@@ -46,14 +48,16 @@ pub struct HPConfig{}
 #[async_trait]
 impl AppPlugin for HPConfig {
     const SCOPE : &'static str = SCOPE;
+    const ROOT_REDIR : &'static str = ROOT_REDIR;
     async fn scheduled_process(&self){}
     fn config(cfg: &mut ServiceConfig){
+       
         cfg
 //        .service(web::redirect("/index",format!("/{}/",Self::SCOPE)))
         .service(front_page)
-        .service(web::redirect("/index",format!("/{}/home",Self::SCOPE)))
-        .service(web::redirect("/",format!("/{}/home",Self::SCOPE)))
+ //       .service(web::redirect("/index",format!("/{}/home",Self::SCOPE)))
         .service(resume)
+
         ;
     }
 }

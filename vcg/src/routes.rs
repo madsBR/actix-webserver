@@ -19,15 +19,15 @@ use crate::result_page::{VCGResultTemplate};
 use askama::Template;
 use askama::Error as AskaErr;
 use log::debug;
+use std::fmt::format;
 use crate::index_template::IndexTemplate;
 
 
-const SCOPE : &'static str = "vcg_app";
+const SCOPE : &'static str = "vcg";
 pub struct VcgAppConfig{}
-
-
-#[get("/index")]
-async fn index() -> impl Responder {
+const ROOT_REDIR : &'static str = "app";
+#[get("/app")]
+async fn app() -> impl Responder {
     let page = IndexTemplate::new(SCOPE).render();
     let response = match page{
      Ok(page) => HttpResponse::Ok().body(page),
@@ -40,7 +40,7 @@ async fn index() -> impl Responder {
 
 
 
-#[post("/index/submit_bids")]
+#[post("/app/submit_bids")]
 async fn submit_bids(content : String) -> impl Responder {
     let content: BidPostBackContent = serde_json::from_str(&content).unwrap();
     log::debug!("received bids {:?}",content);
@@ -67,13 +67,13 @@ async fn ping() -> impl Responder {
 impl AppPlugin for VcgAppConfig {
     
     const SCOPE : &'static str = SCOPE;
+    const ROOT_REDIR : &'static str = ROOT_REDIR;
     async fn scheduled_process(&self){}
     fn config(cfg : &mut ServiceConfig ){
         cfg
         .service(ping)
-        .service(index)
-        .service(submit_bids)
-        ;
+        .service(app)
+        .service(submit_bids);
     }
 }
 
