@@ -1,26 +1,21 @@
-export function GoodObj(id, name, color) {
-    this.id = id;
-    this.name = name;
-    this.color = color;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+function createGoodObj(id, name, color) {
+    return { id, name, color };
 }
-
-
-export function PlayerObj(id, name) {
-  this.id = id;
-  this.name = name;
+exports.createGoodObj = createGoodObj;
+function createPlayerObj(id, name) {
+    return { id, name };
 }
-
-
-export const NULL_GOOD = new GoodObj(6,'none','#FFFFFF')
-
-export const goods = [
-    new GoodObj(0,'Firaks','#808B96'),
-    new GoodObj(1,'Ivits','#FF0000'),
-    new GoodObj(2,'Terran','#0000FF'),
-    new GoodObj(3,'Xenon','#FFFF00'),
-    new GoodObj(4,'Geoden','#F39c12'),
-    new GoodObj(5,'Itars','#FFFFFF'),
-    NULL_GOOD
-  ];
-
-export const NULL_GOOD_INDEX = goods.length-1; 
+exports.createPlayerObj = createPlayerObj;
+exports.NULL_GOOD = createGoodObj(6, 'none', '#FFFFFF');
+exports.goods = [
+    createGoodObj(0, 'Firaks', '#808B96'),
+    createGoodObj(1, 'Ivits', '#FF0000'),
+    createGoodObj(2, 'Terran', '#0000FF'),
+    createGoodObj(3, 'Xenon', '#FFFF00'),
+    createGoodObj(4, 'Geoden', '#F39c12'),
+    createGoodObj(5, 'Itars', '#FFFFFF'),
+    exports.NULL_GOOD,
+];
+exports.NULL_GOOD_INDEX = exports.goods.length - 1;
