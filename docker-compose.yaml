@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  nginx:
+    image: my-nginx
+    ports:
+      - 80:80
+    depends_on:
+      - actix
+      - shiny
+
+  shiny:
+    image: my-shiny:latest
+    expose:
+      - 3838
+    # Add additional configuration for app1 if needed
+
+
+  actix:
+    image: homepage:1
+    expose:
+      - 8080
+    # Add additional configuration for app2 if needed

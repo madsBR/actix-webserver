@@ -114,3 +114,16 @@ mod tests {
         println!("{}",z.unwrap())
     }
 }
+
+
+#[cfg(test)]
+mod vcg_auction_tests {
+    use crate::ext_types;
+    use crate::vcg_auction_routine;
+    #[test]
+    fn test_create_bid_info(){
+
+    }
+
+
+}
