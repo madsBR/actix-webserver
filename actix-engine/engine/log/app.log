@@ -1143,3 +1143,71 @@
 2023-07-23T00:21:50.872626822+02:00 INFO actix_server::worker - shutting down idle worker
 2023-07-23T00:21:50.872946472+02:00 INFO actix_server::worker - shutting down idle worker
 2023-07-23T00:21:50.873067004+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-23T08:58:44.494955313+02:00 INFO engine - Initializing web server
+2023-07-23T08:58:44.518471582+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-23T08:58:44.518846670+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-23T08:58:58.723838131+02:00 DEBUG actix_files::service - error handling /vcg/static/js/bundle.js: No such file or directory (os error 2)
+2023-07-23T08:59:01.841621365+02:00 DEBUG actix_files::service - error handling /vcg/static/js/bundle.js: No such file or directory (os error 2)
+2023-07-23T08:59:03.101229663+02:00 DEBUG actix_files::service - error handling /vcg/static/js/bundle.js: No such file or directory (os error 2)
+2023-07-23T08:59:24.061191260+02:00 DEBUG actix_files::service - error handling /vcg/static/js/bundle.js: No such file or directory (os error 2)
+2023-07-23T08:59:35.078391705+02:00 DEBUG actix_files::service - error handling /vcg/static/js/bundle.js: No such file or directory (os error 2)
+2023-07-23T09:01:42.124775032+02:00 DEBUG actix_files::service - error handling /vcg/static/js/bundle.js: No such file or directory (os error 2)
+2023-07-23T09:01:43.846699339+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-23T09:01:43.846907891+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-23T09:01:43.847018057+02:00 INFO actix_server::worker - force shutdown worker, closing 1 connections
+2023-07-23T09:01:43.847124632+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-23T09:01:43.847474744+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-23T09:01:43.847512376+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-23T09:01:43.848225842+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-23T09:01:54.971411245+02:00 INFO engine - Initializing web server
+2023-07-23T09:01:54.989869622+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-23T09:01:54.989898311+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-23T09:01:55.991644844+02:00 DEBUG actix_files::service - error handling /vcg/static/js/vcg-entry.js: No such file or directory (os error 2)
+2023-07-23T09:01:56.894955699+02:00 DEBUG actix_files::service - error handling /vcg/static/js/vcg-entry.js: No such file or directory (os error 2)
+2023-07-23T09:01:57.579349246+02:00 DEBUG actix_files::service - error handling /vcg/static/js/vcg-entry.js: No such file or directory (os error 2)
+2023-07-23T09:01:58.220500021+02:00 DEBUG actix_files::service - error handling /vcg/static/js/vcg-entry.js: No such file or directory (os error 2)
+2023-07-23T09:01:58.805779834+02:00 DEBUG actix_files::service - error handling /vcg/static/js/vcg-entry.js: No such file or directory (os error 2)
+2023-07-23T09:01:59.457674175+02:00 DEBUG actix_files::service - error handling /vcg/static/js/vcg-entry.js: No such file or directory (os error 2)
+2023-07-23T09:02:00.082443959+02:00 DEBUG actix_files::service - error handling /vcg/static/js/vcg-entry.js: No such file or directory (os error 2)
+2023-07-23T09:02:00.715155297+02:00 DEBUG actix_files::service - error handling /vcg/static/js/vcg-entry.js: No such file or directory (os error 2)
+2023-07-23T09:02:01.291505843+02:00 DEBUG actix_files::service - error handling /vcg/static/js/vcg-entry.js: No such file or directory (os error 2)
+2023-07-23T09:03:06.960462076+02:00 DEBUG actix_files::service - error handling /vcg/static/js/vcg-entry.js: No such file or directory (os error 2)
+2023-07-23T09:04:12.547775841+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-23T09:04:12.547968076+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-23T09:04:12.548221280+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-23T09:04:12.548322014+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-23T09:04:12.548767544+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-23T09:04:12.548930894+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-23T09:04:12.549190129+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-23T09:04:14.443278232+02:00 INFO engine - Initializing web server
+2023-07-23T09:04:14.466424008+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-23T09:04:14.466484219+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-23T09:04:31.957042476+02:00 DEBUG actix_files::service - error handling /vcg/static/js/vcg-entry.js: No such file or directory (os error 2)
+2023-07-23T09:04:36.100325624+02:00 DEBUG actix_files::service - error handling /vcg/static/js/vcg-entry.js: No such file or directory (os error 2)
+2023-07-23T09:04:40.536062533+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-23T09:04:40.536271119+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-23T09:04:40.536555291+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-23T09:04:40.536770298+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-23T09:04:40.536951347+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-23T09:04:40.537246820+02:00 INFO actix_server::worker - force shutdown worker, closing 1 connections
+2023-07-23T09:04:40.537624867+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-23T09:04:48.835530672+02:00 INFO engine - Initializing web server
+2023-07-23T09:04:48.853884807+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-23T09:04:48.853923415+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-23T09:10:22.193040955+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-23T09:10:22.193242711+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-23T09:10:22.193568784+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-23T09:10:22.193817947+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-23T09:10:22.194043137+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-23T09:10:22.194249692+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-23T09:10:22.194501465+02:00 INFO actix_server::accept - accept thread stopped
+2023-07-23T09:10:24.073950520+02:00 INFO engine - Initializing web server
+2023-07-23T09:10:24.094695671+02:00 INFO actix_server::builder - starting 4 workers
+2023-07-23T09:10:24.094767238+02:00 INFO actix_server::server - Actix runtime found; starting in Actix runtime
+2023-07-23T09:13:59.660337230+02:00 INFO actix_server::server - SIGINT received; starting forced shutdown
+2023-07-23T09:13:59.660541767+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-23T09:13:59.660706672+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-23T09:13:59.661135715+02:00 DEBUG actix_server::accept - paused accepting connections on 0.0.0.0:8080
+2023-07-23T09:13:59.661295253+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-23T09:13:59.661504816+02:00 INFO actix_server::worker - shutting down idle worker
+2023-07-23T09:13:59.661702823+02:00 INFO actix_server::accept - accept thread stopped

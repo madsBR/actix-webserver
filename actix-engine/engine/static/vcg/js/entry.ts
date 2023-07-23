@@ -1,5 +1,5 @@
-import { toggleOption, validateInput, colorCodeToInteger, integerToColorCode, getPushBackUrl, createRow, clearRow, has_null_good_selected } from './helpers.js';
-import { GoodObj, PlayerObj,createPlayerObj,createGoodObj, goods, NULL_GOOD } from './objects.js';
+import { toggleOption, validateInput, colorCodeToInteger, integerToColorCode, getPushBackUrl, createRow, clearRow, has_null_good_selected } from './helpers';
+import { GoodObj, PlayerObj,createPlayerObj,createGoodObj, goods, NULL_GOOD } from './objects';
 declare global {
   interface Window {
     validateInput: (input: HTMLInputElement) => boolean;

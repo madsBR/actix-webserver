@@ -30,7 +30,7 @@ function getEntries() {
     const apps = fs.readdirSync(appsDir);
     apps.forEach(app => {
       const appPath = path.join(appsDir, app, 'js', 'entry.ts');
-      const appKey = path.join(app, 'js', 'bundle');      
+      const appKey = path.join(app, 'js', `${app}-entry`);      
   
       if (fs.existsSync(appPath)) {
         entries[appKey] = appPath;

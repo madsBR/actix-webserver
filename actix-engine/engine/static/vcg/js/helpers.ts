@@ -1,4 +1,4 @@
-import { NULL_GOOD, GoodObj, goods, NULL_GOOD_INDEX } from './objects.js';
+import { NULL_GOOD, GoodObj, goods, NULL_GOOD_INDEX } from './objects';
 
 export function is_null_good(good: GoodObj): boolean {
   return good === NULL_GOOD;
