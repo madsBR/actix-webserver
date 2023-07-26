@@ -10,9 +10,10 @@ use async_trait::async_trait;
 use std::path::PathBuf;
 use crate::ext_types::{BidPostBackContent,Color};
 use crate::vcg_auction_routine::{self, vcg_routine};
+use crate::client_bid_info::ClientBidInfo;
 use serde::{Deserialize,Serialize};
 use vcg_auction::vcg_base_types::{VCGOutput, Pairing};
-use vcg_auction_routine::{ClientBidInfo,VCGOutputContent};
+use vcg_auction_routine::{VCGOutputContent};
 use std::env;
 use regex::Regex;
 use crate::result_page::{VCGResultTemplate};
@@ -39,19 +40,32 @@ async fn app() -> impl Responder {
 
 
 
-
+/*
+TO ENSURE FOLLOWING:
+If player in bid pool then player in pls vector.
+MAYBE: If player in pls vector then pls should get assigned a good as if plaer bidded "less than 0"
+*/
 #[post("/app/submit_bids")]
 async fn submit_bids(content : String) -> impl Responder {
     let content: BidPostBackContent = serde_json::from_str(&content).unwrap();
     log::debug!("received bids {:?}",content);
-    let resp_content = vcg_routine(content);
-    let page_result = VCGResultTemplate::from(&resp_content).render();
-    let response = match page_result{
-     Ok(page) => HttpResponse::Ok().body(page),
-    _ => HttpResponse::InternalServerError().into(),
-    };
-    log::debug!("responding {:?}",response);
-    response
+    match ClientBidInfo::try_from(content){
+        Ok(cli_bid_info) => {    
+            log::debug!("succesfully formatted postback into client bid info");
+        let resp_content = vcg_routine(cli_bid_info);
+            let page_result = VCGResultTemplate::from(&resp_content).render();
+            let response = match page_result{
+            Ok(page) => HttpResponse::Ok().body(page),
+            _ => HttpResponse::InternalServerError().into(),
+            };
+            log::debug!("responding {:?}",response);
+            return(response);
+        }
+        Err(str) => {
+            log::debug!("Failed to translate postback content to client bid info");
+            return(HttpResponse::BadRequest().body(str));
+        }
+    }
 }
 
 
@@ -116,7 +130,7 @@ mod tests {
 
     #[test]
     fn deser_good() {
-        let good : GoodExt = GoodExt { id: 2, name: "hej".to_string(), color:  "#00FA00".to_string().try_into().unwrap() };
+        let good : GoodExt = GoodExt { id: 2, name: "hej".to_string(), color:  "#00FA00".try_into().unwrap() };
         let json = r#"
         {
             "id": 24,
@@ -126,7 +140,7 @@ mod tests {
         "#;
         let v : GoodExt = serde_json::from_str(json).unwrap();
         assert_eq!(v.color.str,"ABC123");
-        let good : GoodExt = GoodExt { id: 2, name: "hej".to_string(), color:  "#00FA00".to_string().try_into().unwrap() };
+        let good : GoodExt = GoodExt { id: 2, name: "hej".to_string(), color:  "#00FA00".try_into().unwrap() };
         let json = r#"
         {
             "id": 24,

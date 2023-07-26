@@ -17,6 +17,8 @@ impl<I,T,F> Iterator for IteratorAs<I,T> where I : Iterator<Item = F>, T: From<F
         } 
     }    
 }
+
+
 pub trait IteratorAsTr<I,F>{
     fn each_into<T : From<F>>(iterator : I) -> IteratorAs<I,T>;
 }
