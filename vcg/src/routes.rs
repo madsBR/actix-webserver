@@ -25,6 +25,7 @@ use crate::index_template::IndexTemplate;
 
 
 const SCOPE : &'static str = "vcg";
+
 pub struct VcgAppConfig{}
 const ROOT_REDIR : &'static str = "app";
 #[get("/app")]
