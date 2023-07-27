@@ -32,13 +32,6 @@ macro_rules! impl_usize_like {
                 Self{val : value}
             }
         }
-
-        impl From<&usize> for $usizeLike{
-            fn from(value: &usize) -> Self {
-                Self{val : *value}
-            }
-        }
-
     };
 }
 
@@ -100,14 +93,6 @@ impl Pairing{
     }
     pub fn from_unpriced(pl : Player, good: Good) -> Self{
         Self { pl: pl, bought_good: Some(GoodWPrice { good: good, price: 0.into() }) }
-    }
-}
-impl From<(usize,Option<usize>,usize)> for Pairing{
-    fn from((pl,good,pr): (usize,Option<usize>,usize)) -> Self {
-        match good {
-            Some(g) => Self{pl: pl.into(),bought_good : Some(GoodWPrice{good: g.into(), price : pr.into()})},
-            None => Self{pl: pl.into(),bought_good: None},
-        }
     }
 }
 

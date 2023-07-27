@@ -42,9 +42,6 @@ impl<'a> VCG_Auction<'a>{
             let sub_bids = self.bids.select(Axis(0), &usize_combi);
             let pl_combi = usize_combi.into_iter_as().collect_vec();
             self.auctions.insert(pl_combi, VCG_Computer::new(sub_nr_players, self.nr_goods, sub_masks.view(), sub_bids.view()).compute_into_out());
-            println!("----------------------------------------------------\n");
-            println!("table: {:?}",self.auctions);
-            println!("----------------------------------------------------\n");
 
         }
         //println!("auctions are{:?}",self.auctions);
@@ -55,18 +52,13 @@ impl<'a> VCG_Auction<'a>{
 
     fn assign_sub_prices_unsaturated(&self,vcg_output : &mut VCGOutput){
         //if self.nr_goods<self.nr_players
-        println!("----------------------------------------------------------\n debug vcg output {:?}\n ---------------------------------------------------",vcg_output);
+        
         for ind in (0..vcg_output.nr_players()){
             let winning_pl = vcg_output[ind].pl;
-            println!("Running through ind {}. vcg output is {:?}",ind,vcg_output[ind]);
-            println!("Running through ind {}. winning pl is pl{:?}",ind,winning_pl);
             let alt_cost = (0..self.nr_players).into_iter_as::<Player>().filter(|pl| *pl!= winning_pl).combinations(self.nr_goods)
                 .map(|alt_combi| self.auctions[&alt_combi].best_bid_sum)
                 .max().unwrap();
-        
-            println!("subtracting {} for vcg_output {:?}",alt_cost.val,vcg_output[ind]);            
-            vcg_output[ind].bought_good.unwrap().price = alt_cost - vcg_output[ind].bought_good.unwrap().price;
-
+            vcg_output[ind].bought_good.unwrap().price -= alt_cost;
         }
     }
 
@@ -134,20 +126,13 @@ impl<'a> VCG_Auction<'a>{
             }
         }
         ;
-        println!("best pairings is now {:?}",best_pairings);
-        println!("winners:{:?}",winners);
-        let winner_ids : Vec<usize> = winners.unwrap().iter().map(|x| x.val).collect();
-        let best_pairing_ids : Vec<(usize,usize)> = best_pairings.unwrap().iter().map(|(x,y)| (winner_ids[x.val],y.val)).collect_vec();         
-        let x = best_pairing_ids.iter().map(
-            |(pl,good)| 
-                Pairing::new( pl.into(), good.into(), (max_price - self.bids[(*pl,*good)].into()) )
-        ).collect_vec();
-        let output = VCGOutput::new(x);
+        let output = VCGOutput::new(
+            best_pairings.unwrap().iter().map(
+                    |(pl,good)| Pairing::new( *pl, *good, max_price - self.bids[(usize::from(*pl),usize::from(*good))].into())
+                    ).collect_vec()
+                );
 
-        println!("......................................................");
-        println!("best output returned is now {:?}",output);
-        println!("......................................................");
-
+            
         output
     }
 
