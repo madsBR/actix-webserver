@@ -9,9 +9,6 @@ use lazy_static::lazy_static;
 
 
 
-use std::cell::Cell;
-
-
 fn is_valid_hexadecimal(input: &str) -> bool {
 
     lazy_static! {
@@ -163,20 +160,6 @@ impl Debug for ID{
 }
 
 
-
-
-#[derive(Deserialize, Serialize,Debug)]
-pub struct BidPostBackContent {
-    pub id : Option<ID>,
-    pub player_nr : u64,
-    pub pls : TinyVec<[PlayerExt;5]>,
-    pub goods : TinyVec<[GoodExt;10]>,
-    pub bid_pairings: Vec<(usize,Option<usize>,usize)>,
-}
-
-impl BidPostBackContent {
-
-}
 
 
 

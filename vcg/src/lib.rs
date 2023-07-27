@@ -7,6 +7,6 @@ mod result_page;
 mod ext_types;
 mod index_template;
 mod client_bid_info;
-
+mod bid_post_back_content;
 #[cfg(test)]
 mod test_data;

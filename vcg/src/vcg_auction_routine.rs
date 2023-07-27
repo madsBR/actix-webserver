@@ -44,15 +44,18 @@ mod vcg_auction_tests {
     use tinyvec::{tiny_vec, TinyVec};
     use vcg_auction::iterator_as::IntoIteratorAsTr;
     use vcg_auction::vcg_base_types::{Player,Good,Price, Pairing};
-
+    use std::vec::Vec;
+    use std::vec;
     use crate::ext_types::{self, ID, PlayerExt, GoodExt,Color};
-    use crate::ext_types::BidPostBackContent;
+    use crate::bid_post_back_content::BidPostBackContent;
+    use crate::test_data::test_utils::{get_test_data_bad_good, check_vec, get_test_data_valid,generate_test_data};
     use crate::vcg_auction_routine;
 
     use super::*;
 
     #[test]
     fn it_works() {
+        use crate::test_data::test_utils::{get_test_data_valid,};
         let x = Pairing::new(5.into(), 3.into(), 2.into());
         let good = GoodExt{ id : 3,name : "some good".to_string(), color : Color { str: "FF00AB".to_string() }};
         let x = OutputPairing{ pl: PlayerExt::new(3, "Joe") ,good_color_price : Some(GoodWPriceExt{good : good,price : 5.into()}) };
@@ -62,5 +65,105 @@ mod vcg_auction_tests {
         println!("{}",z.unwrap())
     }
 
+    
+    #[test]
+    fn test_auction_goods() {
+        let (id,pls,good,pairs) = get_test_data_valid();
+        let content = BidPostBackContent{
+            id : id,
+            player_nr : pls.len() as u64,
+            goods: good,
+            pls : pls,
+            bid_pairings : pairs,
+        };
+        let client_bid_info = ClientBidInfo::try_from(content).unwrap();
+        let output = vcg_auction_routine::vcg_routine(client_bid_info);
+        let output_pl_ids = output.output.iter().map(|x| {
+            match &x.good_color_price {
+                Some(good_w_pr) => (x.pl.id,Some(good_w_pr.good.id)),
+                None => (x.pl.id,None),
+            }
+        }).collect();
+        let exp_vec : Vec<(usize,Option<usize>)> = vec![
+            (1,Some(3)),
+            (3,Some(4)),
+            (4,Some(2)),
+        ];
+        check_vec(output_pl_ids, exp_vec)
+    }
+
+    
+    #[test]
+    fn test_auction1() {
+        
+        let (inp,out_exp) = generate_test_data(
+            (1..=4).collect(),
+            (3..=6).collect(),
+            vec![
+                4,2,8,9,
+                2,5,3,6,
+                0,0,9,7,
+                0,7,6,9,
+            ],
+            vec![
+                (1,Some(3),0),
+                (2,Some(4),3),
+                (3,Some(5),4),
+                (4,Some(6),5),
+
+            ],
+             false);
+        
+
+
+        
+        let content = BidPostBackContent{
+            id : inp.0,
+            player_nr : inp.1.len() as u64,
+            goods: inp.2,
+            pls : inp.1,
+            bid_pairings : inp.3,
+        };           
+        let client_bid_info = ClientBidInfo::try_from(content).unwrap();
+        let output = vcg_auction_routine::vcg_routine(client_bid_info);        
+        check_vec(output.output, out_exp)
+    }
+   
+
+    #[test]
+    fn test_auction2() {
+        //TODO!!!!!!!!!!!!!!!
+        let (inp,out_exp) = generate_test_data(
+            (1..=4).collect(),
+            (3..=7).collect(),
+            vec![
+                4,2,8,4,6,
+                6,7,0,6,3,
+                7,6,0,6,6,
+                5,7,0,6,2,
+            ],
+            vec![
+                (1,Some(5),0),
+                (2,Some(6),1),
+                (3,Some(3),4),
+                (4,Some(4),5),
+
+            ],
+             false);
+        
+
+
+        println!("BID PAIRS{:?}",inp.3);
+        let content = BidPostBackContent{
+            id : inp.0,
+            player_nr : inp.1.len() as u64,
+            goods: inp.2,
+            pls : inp.1,
+            bid_pairings : inp.3,
+        };           
+        let client_bid_info = ClientBidInfo::try_from(content).unwrap();
+        let output = vcg_auction_routine::vcg_routine(client_bid_info);        
+        check_vec(output.output, out_exp)
+    }
 
 }
