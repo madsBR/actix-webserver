@@ -41,13 +41,11 @@ impl<'a> VCG_Computer<'a>{
     pub fn new(nr_players : usize, nr_goods : usize,masks : ArrayView2<'a,usize>,bids : ArrayView2<'a,usize>) -> Self{
         let last_player = nr_players -1;
         let mut lagged_pairing_status : [Good;Player::MAX_PLAYERS]= [Good{val : 0};Player::MAX_PLAYERS];
-        let mask_stack = masks.sum_axis(Axis(0));
+        let mask_stack = masks.slice(s![..last_player,..]).sum_axis(Axis(0));
         lagged_pairing_status.iter_mut().enumerate().take(last_player).map(|(i,good)| {*good = Good{val : i};}).last();
         let best_pairings = [None;Player::MAX_PLAYERS];
         //println!("constructed with mask_stack {:?}, masks {:?} and current pairing status {:?} bids are {:?}",mask_stack,masks,lagged_pairing_status.iter().map(|x| x.val).collect_vec(),bids);
-        let lagged_bid_sum = bids.slice(s![0..last_player,0..last_player]).diag().iter().sum();
-        println!("initial lagged bid sum us {}",lagged_bid_sum);
-
+        let lagged_bid_sum = bids.slice(s![0..last_player,..]).diag().iter().sum();
         Self{best_pairings: best_pairings , nr_goods : nr_goods, lagged_pairing_status , mask_stack : mask_stack , masks : masks, bids : bids, lagged_bid_sum : lagged_bid_sum, best_bid_sum : 0 , last_player : last_player} 
     }
 
@@ -57,10 +55,6 @@ impl<'a> VCG_Computer<'a>{
             |(_good,mask_val)| **mask_val==0).map(|(good_val,_)|Good{val : good_val})
     }
 
-    fn first_unmasked_good(&self) -> Good{
-        (0..self.nr_goods).zip(self.mask_stack.iter()).find(
-            |(_good,mask_val)| **mask_val==0).map(|(good_val,_)|Good{val : good_val}).unwrap()
-    }
 
     fn reset(&mut self){
         self.mask_stack.assign(&self.masks.slice(s![..self.last_player,..]).sum_axis(Axis(0)));        
@@ -72,17 +66,17 @@ impl<'a> VCG_Computer<'a>{
     fn increment_player_pairing(&mut self,player : &Player) -> bool {        
         //returns true if reset
         let result : bool;
-        println!("inc is called with player {} and mask_stack {:?}",player.val,self.mask_stack);
+        //println!("inc is called with player {} and mask_stack {:?}",player.val,self.mask_stack);
         //should not be called on last player!        
         self.remove_masks_and_bid_on_stack(self.lagged_pairing_status[player.val], player);
         if let Some(next_good) = self.next_unmasked_good_for_player(player){
                 self.lagged_pairing_status[player.val] = next_good.into();
                 result = false;
-                println!("found next good{}",next_good.val);
+                //println!("found next good{}",next_good.val);
             } else {
-                self.lagged_pairing_status[player.val] = self.first_unmasked_good();                
+                self.lagged_pairing_status[player.val] = 0.into();
                 result = true;
-                println!("did not find another legit good reset to zero");
+                //println!("did not find another legit good reset to zero");
 
             }
         self.put_masks_and_bid_on_stack(self.lagged_pairing_status[player.val], player);
@@ -92,9 +86,7 @@ impl<'a> VCG_Computer<'a>{
     
 
     fn increment_pairings(&mut self) -> bool{
-        println!("best bid befor inc is {} achieved at {:?}. Lagged bid sum is {}",self.best_bid_sum,self.best_pairings, self.lagged_bid_sum);
-        println!("incrementing. Current was  {:?}",self.lagged_pairing_status.iter().map(|x| x.val).collect_vec());
-
+        //println!("incrementing. Current was  {:?}",self.lagged_pairing_status.iter().map(|x| x.val).collect_vec());
         //returns whether we are done or not.
         let mut player = Player{val :self.last_player};
         let mut shall_reset_next = true;
@@ -102,8 +94,9 @@ impl<'a> VCG_Computer<'a>{
             player -=1;
             shall_reset_next = self.increment_player_pairing(&player);
             if player.val==0 && shall_reset_next{return true}
-            println!("inc_pair : player_val is {}. last player is {}", player.val,self.last_player)
+            //println!("player_val is {}", player.val)
         } 
+//        println!("incrementing. Current is now  {:?}",self.lagged_pairing_status.iter().map(|x| x.val).collect_vec());
         shall_reset_next
        }       
 
