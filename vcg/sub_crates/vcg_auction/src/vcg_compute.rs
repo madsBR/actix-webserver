@@ -41,7 +41,7 @@ impl<'a> VCG_Computer<'a>{
     pub fn new(nr_players : usize, nr_goods : usize,masks : ArrayView2<'a,usize>,bids : ArrayView2<'a,usize>) -> Self{
         let last_player = nr_players -1;
         let mut lagged_pairing_status : [Good;Player::MAX_PLAYERS]= [Good{val : 0};Player::MAX_PLAYERS];
-        let mask_stack = masks.slice(s![..last_player,..]).sum_axis(Axis(0));
+        let mask_stack = masks.sum_axis(Axis(0));
         lagged_pairing_status.iter_mut().enumerate().take(last_player).map(|(i,good)| {*good = Good{val : i};}).last();
         let best_pairings = [None;Player::MAX_PLAYERS];
         //println!("constructed with mask_stack {:?}, masks {:?} and current pairing status {:?} bids are {:?}",mask_stack,masks,lagged_pairing_status.iter().map(|x| x.val).collect_vec(),bids);
@@ -55,6 +55,11 @@ impl<'a> VCG_Computer<'a>{
             |(_good,mask_val)| **mask_val==0).map(|(good_val,_)|Good{val : good_val})
     }
 
+
+    fn first_unmasked_good(&self) -> Good{
+        (0..self.nr_goods).zip(self.mask_stack.iter()).find(
+            |(_good,mask_val)| **mask_val==0).map(|(good_val,_)|Good{val : good_val}).unwrap()
+    }
 
     fn reset(&mut self){
         self.mask_stack.assign(&self.masks.slice(s![..self.last_player,..]).sum_axis(Axis(0)));        
@@ -74,7 +79,7 @@ impl<'a> VCG_Computer<'a>{
                 result = false;
                 //println!("found next good{}",next_good.val);
             } else {
-                self.lagged_pairing_status[player.val] = 0.into();
+                self.lagged_pairing_status[player.val] = self.first_unmasked_good();
                 result = true;
                 //println!("did not find another legit good reset to zero");
 

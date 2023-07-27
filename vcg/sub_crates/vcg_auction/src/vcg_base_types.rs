@@ -32,6 +32,13 @@ macro_rules! impl_usize_like {
                 Self{val : value}
             }
         }
+
+        impl From<&usize> for $usizeLike{
+            fn from(value: &usize) -> Self {
+                Self{val : *value}
+            }
+        }
+
     };
 }
 
