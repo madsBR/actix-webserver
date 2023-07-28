@@ -44,9 +44,9 @@ impl<'a> VCG_Auction<'a>{
             self.auctions.insert(pl_combi, VCG_Computer::new(sub_nr_players, self.nr_goods, sub_masks.view(), sub_bids.view()).compute_into_out());
 
         }
-        //println!("auctions are{:?}",self.auctions);
+        println!("auctions are{:?}",self.auctions);
         let winner_combi = self.get_best_sub_auction();
-        //println!("output{:?}",winner_combi);
+        println!("WINNER IS output{:?}",winner_combi);
         winner_combi        
     }   
 
@@ -58,7 +58,7 @@ impl<'a> VCG_Auction<'a>{
             let alt_cost = (0..self.nr_players).into_iter_as::<Player>().filter(|pl| *pl!= winning_pl).combinations(self.nr_goods)
                 .map(|alt_combi| self.auctions[&alt_combi].best_bid_sum)
                 .max().unwrap();
-            vcg_output[ind].bought_good.unwrap().price -= alt_cost;
+            vcg_output[ind].bought_good.unwrap().price = alt_cost - vcg_output[ind].bought_good.unwrap().price;
         }
     }
 
@@ -125,10 +125,10 @@ impl<'a> VCG_Auction<'a>{
                 max_price = auc_res_out.best_bid_sum;                
             }
         }
-        ;
+        
         let output = VCGOutput::new(
-            best_pairings.unwrap().iter().map(
-                    |(pl,good)| Pairing::new( *pl, *good, max_price - self.bids[(usize::from(*pl),usize::from(*good))].into())
+            best_pairings.unwrap().iter().zip(winners.unwrap()).map(
+                    |((_,good),wnr)| Pairing::new( *wnr, *good, max_price - self.bids[(usize::from(*wnr),usize::from(*good))].into())
                     ).collect_vec()
                 );
 

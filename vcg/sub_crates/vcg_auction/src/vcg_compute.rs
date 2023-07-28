@@ -41,12 +41,11 @@ impl<'a> VCG_Computer<'a>{
     pub fn new(nr_players : usize, nr_goods : usize,masks : ArrayView2<'a,usize>,bids : ArrayView2<'a,usize>) -> Self{
         let last_player = nr_players -1;
         let mut lagged_pairing_status : [Good;Player::MAX_PLAYERS]= [Good{val : 0};Player::MAX_PLAYERS];
-        let mask_stack = masks.sum_axis(Axis(0));
-        lagged_pairing_status.iter_mut().enumerate().take(last_player).map(|(i,good)| {*good = Good{val : i};}).last();
+        let mask_stack = Array1::zeros(nr_goods);
         let best_pairings = [None;Player::MAX_PLAYERS];
         //println!("constructed with mask_stack {:?}, masks {:?} and current pairing status {:?} bids are {:?}",mask_stack,masks,lagged_pairing_status.iter().map(|x| x.val).collect_vec(),bids);
-        let lagged_bid_sum = bids.slice(s![0..last_player,..]).diag().iter().sum();
-        Self{best_pairings: best_pairings , nr_goods : nr_goods, lagged_pairing_status , mask_stack : mask_stack , masks : masks, bids : bids, lagged_bid_sum : lagged_bid_sum, best_bid_sum : 0 , last_player : last_player} 
+
+        Self{best_pairings: best_pairings , nr_goods : nr_goods, lagged_pairing_status , mask_stack : mask_stack , masks : masks, bids : bids, lagged_bid_sum : 0, best_bid_sum : 0 , last_player : last_player}
     }
 
 
@@ -68,47 +67,67 @@ impl<'a> VCG_Computer<'a>{
         self.lagged_bid_sum = self.bids.slice(s![0..self.last_player,..]).diag().iter().sum();
     }
 
-    fn increment_player_pairing(&mut self,player : &Player) -> bool {        
-        //returns true if reset
-        let result : bool;
-        //println!("inc is called with player {} and mask_stack {:?}",player.val,self.mask_stack);
-        //should not be called on last player!        
-        self.remove_masks_and_bid_on_stack(self.lagged_pairing_status[player.val], player);
-        if let Some(next_good) = self.next_unmasked_good_for_player(player){
-                self.lagged_pairing_status[player.val] = next_good.into();
-                result = false;
-                //println!("found next good{}",next_good.val);
-            } else {
-                self.lagged_pairing_status[player.val] = self.first_unmasked_good();
-                result = true;
-                //println!("did not find another legit good reset to zero");
 
-            }
-        self.put_masks_and_bid_on_stack(self.lagged_pairing_status[player.val], player);
-        result
+    fn is_stack_top(&self,pl : Player) -> Option<Good>
+    //is stack top if not none, in which case Some(good) is next good for stack top
+    {
+        if let Some(next_good) = self.next_unmasked_good_for_player(&pl){
+            println!("get_stack_top:: Found stack top {} and next good {:?}", usize::from(pl),next_good);
+            return Some(next_good);
+        } else{
+            None
+        }
     }
 
-    
+    fn decrement_masks_and_bids_to_stack_top(&mut self) -> Option<(usize,Good)>{
+        //Decrement TO w/o including Stack top
+        println!("Decre_masks:::mask stack is {}",self.mask_stack);
+        for pl in (0..self.last_player).rev(){
+            if let Some(next_good) = self.is_stack_top(pl.into()){
+                println!("Decre_masks::found top stack : player {} ",{pl});
+               
+                return(Some((pl,next_good)))
+            } else{
+                println!("Decre_masks::removing for player {} ",pl);
+                self.remove_masks_and_bid_on_stack(self.good_of_pl(pl.into()), &pl.into())            
+            }
+            
+        }   
+        println!("Decre_masks:: ENDED mask stack is {}",self.mask_stack);      
+        None
+    }
 
-    fn increment_pairings(&mut self) -> bool{
-        //println!("incrementing. Current was  {:?}",self.lagged_pairing_status.iter().map(|x| x.val).collect_vec());
-        //returns whether we are done or not.
-        let mut player = Player{val :self.last_player};
-        let mut shall_reset_next = true;
-        while shall_reset_next{
-            player -=1;
-            shall_reset_next = self.increment_player_pairing(&player);
-            if player.val==0 && shall_reset_next{return true}
-            //println!("player_val is {}", player.val)
-        } 
-//        println!("incrementing. Current is now  {:?}",self.lagged_pairing_status.iter().map(|x| x.val).collect_vec());
-        shall_reset_next
-       }       
+    fn good_of_pl(&self, pl : Player) -> Good {
+        self.lagged_pairing_status[pl.val]
+    }
+
+    fn increment_masks_and_bids_and_update_goods(&mut self,stack_top : usize){
+        println!("incr masks :: started with {}. mask stack is {}",stack_top,self.mask_stack);
+        for pl in (stack_top + 1..self.last_player){
+            let first_available_good = self.next_unmasked_good_for_player(&pl.into()).unwrap_or_else(|| self.first_unmasked_good());
+            self.lagged_pairing_status[pl]  = first_available_good;
+
+            self.put_masks_and_bid_on_stack(first_available_good, &pl.into());
+            println!(" incr masks ::: pl {} has new good{} mask stack is {}", pl,first_available_good.val,self.mask_stack);
+
+        }
+        println!("incr masks ::done");         
+    }
+
+
+
+    fn assign_good_to_stack_top(&mut self,stack_top : usize,good : Good){
+        //assumes stack top is not at end
+
+        self.remove_masks_and_bid_on_stack(self.good_of_pl(stack_top.into()), &stack_top.into());
+        self.lagged_pairing_status[stack_top] = good;
+        self.put_masks_and_bid_on_stack(good, &stack_top.into());
+        println!("inc_stack_top :: incrementing pl {} to good {}. Lagged bid sum is now {}",stack_top,self.lagged_pairing_status[stack_top].val,self.lagged_bid_sum);
+    }
 
     fn run_through_last_player(&mut self){
   //      println!("running through last player");
         for (good,(bid,mask_val)) in self.bids.slice(s![self.last_player,..]).iter().zip(self.mask_stack.iter()).enumerate(){
-   //         println!("BEF good is = {} bid for last player is {}, best_bid_sum is {}, current bid sum {} and best bid parings is{:?}",good,bid,self.best_bid_sum,self.lagged_bid_sum,self.best_pairings.iter().filter_map(|x| *x).collect_vec());
       
             if *mask_val == 0{
          //       println!("found legit good {}",good);
@@ -124,15 +143,28 @@ impl<'a> VCG_Computer<'a>{
         }
     }
 
+                
 
     fn compute_2p_players(&mut self){
-        loop{
-            self.run_through_last_player();
-            if (self.increment_pairings()){
-                break;
-            }
+        println!("-----------------STARTING-----------------");
+        println!("{}",self.bids);
+        self.mask_stack +=  &self.masks.slice(s![0,..]);
+        self.lagged_bid_sum += self.bids[(0,0)];
         
+        self.assign_good_to_stack_top(0, Good { val: 0 });       
+        self.increment_masks_and_bids_and_update_goods(0);
+        self.run_through_last_player();
+        
+        while let Some((stack_top,next_good)) = self.decrement_masks_and_bids_to_stack_top(){            
+            println!("start of loop: stack top is now {}, mask stack is {} and status is {:?}",stack_top,self.mask_stack,self.lagged_pairing_status.iter().map(|x| usize::from(*x)).collect_vec());            
+            self.assign_good_to_stack_top(stack_top, next_good); 
+            self.increment_masks_and_bids_and_update_goods(stack_top);
+            println!("Bef Run_through : mask stack is {} and status is {:?}",self.mask_stack,self.lagged_pairing_status.iter().map(|x| usize::from(*x)).collect_vec());
+            self.run_through_last_player();
+            println!("ending loop: max is now {}, stack top was{} and mask stack is {} with best being {:?}",self.best_bid_sum,stack_top,self.mask_stack,self.best_pairings.iter().map(|x| if x.is_some(){usize::from(x.unwrap())} else {0}).collect_vec());
         }
+        println!("ENDED MAX FINDING");
+
     }
 
     fn compute_1_player(&mut self){
@@ -164,18 +196,17 @@ impl<'a> VCG_Computer<'a>{
     }
 
     fn put_masks_and_bid_on_stack(&mut self,good : Good, pl : &Player){
-        //println!("adding masks is called for good {} and pl {}. Removing lagged bid sum was {} and mask stack was {:?}",good.val,pl.val,self.lagged_bid_sum,self.mask_stack);
 
         self.mask_stack +=  &self.masks.slice(s![good.val,..]);
         self.lagged_bid_sum += self.bids[(pl.val,good.val)];
-        //println!("adding masks is called for good {}  and pl {}. Removing lagged bid sum is now {} and mask stack was {:?}",good.val,pl.val,self.lagged_bid_sum,self.mask_stack);
+        println!("put_masks :: incremented pl {:?} to good {:?}, bid sum is currently {}",pl,good,self.lagged_bid_sum)
 
     }
     fn remove_masks_and_bid_on_stack(&mut self,good : Good, pl : &Player){
-        //println!("removing is called for good {}  and pl {}. Removing lagged bid sum was {} and mask stack was {:?}",good.val,pl.val,self.lagged_bid_sum,self.mask_stack);
+        println!("remove_masks:: about to subtrack {} from {}",self.masks.slice(s![good.val,..]),self.mask_stack);
         self.mask_stack -=  &self.masks.slice(s![good.val,..]);
         self.lagged_bid_sum -= self.bids[(pl.val,good.val)];
-        //println!("removing is called for good {}  and pl {}. Removing lagged bid sum is now {} and mask stack was {:?}",good.val,pl.val,self.lagged_bid_sum,self.mask_stack);
+        println!("remove_masks:: subtracted good {} from pl {}. mask: {} now bid sum is down to {}",usize::from(good),usize::from(*pl) as usize,self.mask_stack, self.lagged_bid_sum);
     
     }
 }
@@ -241,8 +272,4 @@ mod vcg_compute_tests {
         assert_eq!(vcg_comp.best_pairings[1], Some(Good{val : 5}));
 
     }
-
-
-
-
 }
