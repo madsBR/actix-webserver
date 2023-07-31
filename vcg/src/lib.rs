@@ -6,7 +6,7 @@
     unused_imports,
     unused_import_braces,
     dead_code,
-    clippy::redundant_redundant_fields,
+    clippy::redundant_field_names,
 )]
 
 pub mod routes;
