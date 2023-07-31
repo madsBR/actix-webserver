@@ -5,7 +5,8 @@
     non_camel_case_types,
     unused_imports,
     unused_import_braces,
-    dead_code
+    dead_code,
+    clippy::redundant_redundant_fields,
 )]
 
 pub mod routes;
