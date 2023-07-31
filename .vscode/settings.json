@@ -1,5 +1,8 @@
 {
     "rust-analyzer.linkedProjects": [
-        "./vcg_app/Cargo.toml"
+        "./vcg/Cargo.toml",
+        "./homepage/Cargo.toml",
+        "./actix-engine/Cargo.toml",
+        "./actix-engine/engine/Cargo.toml",
     ]
 }
