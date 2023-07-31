@@ -132,7 +132,7 @@ mod tests {
 
     #[test]
     fn deser_good() {
-        let good : GoodExt = GoodExt { id: 2, name: "hej".to_string(), color:  "#00FA00".try_into().unwrap() };
+        let _good : GoodExt = GoodExt { id: 2, name: "hej".to_string(), color:  "#00FA00".try_into().unwrap() };
         let json = r#"
         {
             "id": 24,
@@ -142,7 +142,7 @@ mod tests {
         "#;
         let v : GoodExt = serde_json::from_str(json).unwrap();
         assert_eq!(v.color.str,"ABC123");
-        let good : GoodExt = GoodExt { id: 2, name: "hej".to_string(), color:  "#00FA00".try_into().unwrap() };
+        let _good : GoodExt = GoodExt { id: 2, name: "hej".to_string(), color:  "#00FA00".try_into().unwrap() };
         let json = r#"
         {
             "id": 24,

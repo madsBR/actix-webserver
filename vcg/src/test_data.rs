@@ -45,13 +45,13 @@ pub mod test_utils {
                     let pl_ext = PlayerExt{id : *pl, name: pl.to_string()};
                     let good_ext = GoodExt { id : *good,name : good.to_string(),color : Color { str: "#000000".to_string() }};
                     let good_w_price = GoodWPriceExt{good: good_ext, price : pr.into()};
-                    let out = OutputPairing{pl : pl_ext, good_color_price : Some(good_w_price)};
-                    out
+                    
+                    OutputPairing{pl : pl_ext, good_color_price : Some(good_w_price)}
                 }
                 None => {
                     let pl_ext = PlayerExt{id : *pl, name: pl.to_string()};
-                    let out = OutputPairing{pl : pl_ext, good_color_price : None};
-                    out
+                    
+                    OutputPairing{pl : pl_ext, good_color_price : None}
                 }
             }
         ).collect();
@@ -169,7 +169,7 @@ pub mod test_utils {
         // Iterate through the player IDs
         for (pl_idx, &pl_id) in player_ids.iter().enumerate() {
             // Iterate through the good IDs using enumerate()
-            for (good_idx, &good_id) in good_ids.iter().enumerate() {
+            for (_good_idx, &good_id) in good_ids.iter().enumerate() {
                 // Calculate the index to access the correct bid value in the bids vector
                 let bid_idx = m * pl_idx + good_id;    
                 // Push the tuple (player_id, Some(good_id), bid) into the result vector

@@ -55,9 +55,9 @@ mod vcg_auction_tests {
     #[test]
     fn it_works() {
         use crate::test_data::test_utils::{get_test_data_valid,};
-        let x = Pairing::new(5.into(), 3.into(), 2.into());
+        let _x = Pairing::new(5.into(), 3.into(), 2.into());
         let good = GoodExt{ id : 3,name : "some good".to_string(), color : Color { str: "FF00AB".to_string() }};
-        let x = OutputPairing{ pl: PlayerExt::new(3, "Joe") ,good_color_price : Some(GoodWPriceExt{good : good,price : 5.into()}) };
+        let x = OutputPairing{ pl: PlayerExt::new(3, "Joe") ,good_color_price : Some(GoodWPriceExt{good,price : 5.into()}) };
         let vec = vec![x];
         let vcgout = VCGOutputContent{ id : ID::new_random(),output : vec};
         let z = serde_json::to_string(&vcgout);        
@@ -69,10 +69,10 @@ mod vcg_auction_tests {
     fn test_auction_goods() {
         let (id,pls,good,pairs) = get_test_data_valid();
         let content = BidPostBackContent{
-            id : id,
+            id,
             player_nr : pls.len() as u64,
             goods: good,
-            pls : pls,
+            pls,
             bid_pairings : pairs,
         };
         let client_bid_info = ClientBidInfo::try_from(content).unwrap();
@@ -90,8 +90,8 @@ mod vcg_auction_tests {
         ];
         let exp_leftovers = vec![(2,Some(1)),(2,Some(5)),(2,Some(6))];
         assert_eq!(output_pl_ids.len(),4);
-        assert!(exp_vec.iter().all(|exp_elem|output_pl_ids.contains(&exp_elem)));
-        assert!(exp_leftovers.iter().any(|exp_elem|output_pl_ids.contains(&exp_elem)));
+        assert!(exp_vec.iter().all(|exp_elem|output_pl_ids.contains(exp_elem)));
+        assert!(exp_leftovers.iter().any(|exp_elem|output_pl_ids.contains(exp_elem)));
         
     }
 
@@ -206,8 +206,8 @@ mod vcg_auction_tests {
     #[test]
     fn test_auction4() {
         let (inp,out_exp) = generate_test_data(
-            (0..=3).into_iter().map(|x| 3*x).collect(),
-            (0..=4).into_iter().map(|x| 2*x).collect(),
+            (0..=3).map(|x| 3*x).collect(),
+            (0..=4).map(|x| 2*x).collect(),
             vec![
                 6,4,4,2,8,
                 3,2,5,7,0,

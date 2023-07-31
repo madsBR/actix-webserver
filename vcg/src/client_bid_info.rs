@@ -214,10 +214,10 @@ mod tests {
     fn test_create_metadata_bad_pl() {
         let (id, pls, goods, bids) = get_test_data_bad_good();
         let content = BidPostBackContent {
-            id: id,
+            id,
             player_nr: pls.len() as u64,
-            pls: pls,
-            goods: goods,
+            pls,
+            goods,
             bid_pairings: bids,
         };
         let metadata = ContentMetaData::from_content_vals(&content.bid_pairings,content.pls,content.goods);
@@ -228,10 +228,10 @@ mod tests {
     fn test_create_metadata_bad_good() {
         let (id, pls, goods, bids) = get_test_data_bad_good();
         let content = BidPostBackContent {
-            id: id,
+            id,
             player_nr: pls.len() as u64,
-            pls: pls,
-            goods: goods,
+            pls,
+            goods,
             bid_pairings: bids,
         };
         let metadata = ContentMetaData::from_content_vals(&content.bid_pairings,content.pls,content.goods);
@@ -242,10 +242,10 @@ mod tests {
     fn test_create_metadata_valid() {
         let (id, pls, goods, bids) = get_test_data_valid();
         let content = BidPostBackContent {
-            id: id,
+            id,
             player_nr: pls.len() as u64,
-            pls: pls,
-            goods: goods,
+            pls,
+            goods,
             bid_pairings: bids,
         };
 
@@ -257,17 +257,17 @@ mod tests {
     fn test_create_bid_info() {
         let (id, pls, goods, bids) = get_test_data_valid();
         let content = BidPostBackContent {
-            id: id,
+            id,
             player_nr: pls.len() as u64,
-            pls: pls,
-            goods: goods,
+            pls,
+            goods,
             bid_pairings: bids,
         };
         let client_bid_info_mb = ClientBidInfo::try_from(content);
         assert!(client_bid_info_mb.is_ok());
         let client_bid_info = client_bid_info_mb.unwrap();
 
-        let mut x = client_bid_info.bid_buffer.clone();
+        let mut x = client_bid_info.bid_buffer;
         x.sort();
         let exp_vec_pre = vec![
             (0, Some(0), 4),
