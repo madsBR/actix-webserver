@@ -1,40 +1,37 @@
 use crate::bid_post_back_content::BidPostBackContent;
-use crate::ext_types::{Color, GoodExt, GoodWPriceExt, OutputPairing, PlayerExt, ID};
-use lazy_static::lazy_static;
-use regex::Regex;
-use serde::{Deserialize, Deserializer, Serialize};
-use std::fmt::Debug;
+use crate::ext_types::{GoodExt, GoodWPriceExt, OutputPairing, PlayerExt, ID};
 use std::{
-    error,
-    fmt::Display,
-    time::{Duration, Instant},
-    vec,
+    time::{Instant}
 };
 use tinyvec::TinyVec;
 use vcg_auction::vcg_base_types::{Good, GoodWPrice, Pairing, Player, Price};
 
 pub struct ContentMetaData {
-    pub players: TinyVec<[PlayerExt; 5]>,
-    pub goods: TinyVec<[GoodExt; 10]>,
+    pub players_active: TinyVec<[PlayerExt; 5]>,
+    pub goods_active: TinyVec<[GoodExt; 10]>,
     pub bid_nr: usize,
+    pub players_total: TinyVec<[PlayerExt; 5]>,
+    pub goods_total : TinyVec<[GoodExt; 10]>,
 }
 
 impl ContentMetaData {
-    pub fn from_content(content: &BidPostBackContent) -> Result<Self, String> {
+    pub fn from_content_vals(bid_pairings : &Vec<(usize,Option<usize>,usize)>,cont_pls : TinyVec<[PlayerExt;5]>,cont_goods : TinyVec<[GoodExt;10]>) -> Result<Self, String> {
         let mut pl_ids: Vec<usize> = Vec::new();
         let mut good_ids: Vec<usize> = Vec::new();
         let mut bid_counter: usize = 0;
-        for (pl_ext, good_ext) in content.bid_pairings.iter().filter_map(|(x, y, _)| {
+        let iter = bid_pairings.iter().filter_map(|(x, y, _)| {
             if y.is_some() {
                 Some((*x, y.unwrap()))
             } else {
                 None
             }
-        }) {
+        });
+        for (pl_ext, good_ext) in iter{
+        
             pl_ids.push(pl_ext);
             good_ids.push(good_ext);
             bid_counter += 1;
-        }
+        }        
         pl_ids.sort();
         pl_ids.dedup();
         good_ids.sort();
@@ -42,38 +39,40 @@ impl ContentMetaData {
 
         let mut players: TinyVec<[PlayerExt; 5]> = TinyVec::with_capacity(pl_ids.len());
         let mut goods: TinyVec<[GoodExt; 10]> = TinyVec::with_capacity(good_ids.len());
-        for (ind, pl) in pl_ids.iter().enumerate() {
-            if let Some(pl_ext) = content.pls.iter().find(|ext| ext.id == *pl) {
+        for pl in pl_ids.iter() {
+            if let Some(pl_ext) = cont_pls.iter().find(|ext| ext.id == *pl) {
                 players.push(pl_ext.clone());
             } else {
                 let x = format!("A bid came from urecognized player {}", pl);
-                return (Err(x));
+                return Err(x);
             }
         }
-        for (ind, good) in good_ids.iter().enumerate() {
-            if let Some(good_ext) = content.goods.iter().find(|ext| ext.id == *good) {
+        for good in good_ids.iter() {
+            if let Some(good_ext) = cont_goods.iter().find(|ext| ext.id == *good) {
                 goods.push(good_ext.clone());
             } else {
                 let x = format!("A bid came for an urecognized good {}", good);
-                return (Err(x));
+                return Err(x);
             }
         }
 
         Ok(Self {
-            players: players,
-            goods: goods,
+            players_active: players,
+            goods_active: goods,
             bid_nr: bid_counter,
+            players_total : cont_pls, 
+            goods_total : cont_goods,
         })
     }
 
     #[inline]
     pub fn player_int_to_ext<'a>(&'a self, pl: Player) -> &'a PlayerExt {
-        &self.players[usize::from(pl)]
+        &self.players_active[usize::from(pl)]
     }
 
     #[inline]
     pub fn good_int_to_ext<'a>(&'a self, good: Good) -> &'a GoodExt {
-        &self.goods[usize::from(good)]
+        &self.goods_active[usize::from(good)]
     }
 
     #[inline]
@@ -129,7 +128,8 @@ pub struct ClientBidInfo {
 impl TryFrom<BidPostBackContent> for ClientBidInfo {
     type Error = String;
     fn try_from(content: BidPostBackContent) -> Result<Self, Self::Error> {
-        let metadata_mb = ContentMetaData::from_content(&content);
+        let metadata_mb = ContentMetaData::from_content_vals(&content.bid_pairings,content.pls,content.goods);
+        
         match metadata_mb {
             Ok(metadata) => {
                 let instant = Instant::now();
@@ -140,10 +140,10 @@ impl TryFrom<BidPostBackContent> for ClientBidInfo {
                     created_at: instant,
                     metadata: metadata,
                 };
-                return (Ok(cli_bid_info));
+                return Ok(cli_bid_info);
             }
             Err(str) => {
-                return (Err(str));
+                return Err(str);
             }
         }
     }
@@ -162,7 +162,7 @@ struct BidPairingBuilder<'a> {
 impl<'a> BidPairingBuilder<'a> {
     fn new(
         metadt: &'a ContentMetaData,
-        content_bid_pairs: Vec<(usize, Option<usize>, usize)>,
+        content_bid_pairs: Vec<(usize, Option<usize>, usize)>
     ) -> Self {
         Self {
             metadt: metadt,
@@ -186,16 +186,16 @@ impl<'a> BidPairingBuilder<'a> {
     }
 
     fn update_pl_good(&mut self, pl_id: usize, good_id: usize) {
-        if (self.metadt.players[self.pl_ind].id != pl_id) {
+        if self.metadt.players_active[self.pl_ind].id != pl_id {
             self.good_ind = 0;
             self.pl_ind += 1;
         }
-        while (self.metadt.players[self.pl_ind].id != pl_id) {
+        while self.metadt.players_active[self.pl_ind].id != pl_id {
             self.pl_ind += 1;
         }
 
-        while (self.good_ind < self.metadt.goods.len()) {
-            if self.metadt.goods[self.good_ind].id != good_id {
+        while self.good_ind < self.metadt.goods_active.len() {
+            if self.metadt.goods_active[self.good_ind].id != good_id {
                 self.good_ind += 1;
             } else {
                 break;
@@ -226,9 +226,11 @@ mod tests {
             goods: goods,
             bid_pairings: bids,
         };
-        let metadata = ContentMetaData::from_content(&content);
+        let metadata = ContentMetaData::from_content_vals(&content.bid_pairings,content.pls,content.goods);
         assert!(metadata.is_err());
     }
+
+    #[test]
     fn test_create_metadata_bad_good() {
         let (id, pls, goods, bids) = get_test_data_bad_good();
         let content = BidPostBackContent {
@@ -238,10 +240,11 @@ mod tests {
             goods: goods,
             bid_pairings: bids,
         };
-        let metadata = ContentMetaData::from_content(&content);
+        let metadata = ContentMetaData::from_content_vals(&content.bid_pairings,content.pls,content.goods);
         assert!(metadata.is_err());
     }
 
+    #[test]
     fn test_create_metadata_valid() {
         let (id, pls, goods, bids) = get_test_data_valid();
         let content = BidPostBackContent {
@@ -252,7 +255,7 @@ mod tests {
             bid_pairings: bids,
         };
 
-        let metadata = ContentMetaData::from_content(&content);
+        let metadata = ContentMetaData::from_content_vals(&content.bid_pairings,content.pls,content.goods);
         assert!(metadata.is_ok());
     }
 
@@ -270,7 +273,6 @@ mod tests {
         assert!(client_bid_info_mb.is_ok());
         let client_bid_info = client_bid_info_mb.unwrap();
 
-        let metadata = client_bid_info.metadata;
         let mut x = client_bid_info.bid_buffer.clone();
         x.sort();
         let exp_vec_pre = vec![

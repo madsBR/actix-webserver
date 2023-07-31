@@ -31,7 +31,7 @@ pub struct VcgAppConfig{}
 const ROOT_REDIR : &'static str = "app";
 #[get("/app")]
 async fn app() -> impl Responder {
-    let page = IndexTemplate::new(SCOPE).render();
+    let page = IndexTemplate::new(SCOPE).render();    
     let response = match page{
      Ok(page) => HttpResponse::Ok().body(page),
     _ => HttpResponse::InternalServerError().into(),

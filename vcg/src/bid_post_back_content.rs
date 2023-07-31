@@ -11,7 +11,6 @@ pub struct BidPostBackContent {
     pub pls: TinyVec<[PlayerExt; 5]>,
     pub goods: TinyVec<[GoodExt; 10]>,
     pub bid_pairings: Vec<(usize, Option<usize>, usize)>,
-    
 }
 
 impl BidPostBackContent {}

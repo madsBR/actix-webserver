@@ -112,7 +112,7 @@ pub struct GoodWPrice{
 
 #[derive(Debug,PartialEq, Eq, PartialOrd, Ord,Clone,Hash)]
 pub struct VCGOutput{
-    res : Vec<Pairing>
+    pub res : Vec<Pairing>
 }
 
 

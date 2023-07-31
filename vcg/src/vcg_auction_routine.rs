@@ -1,15 +1,11 @@
 use actix_web::{get, web, App, HttpServer, Responder};
 use serde::{Deserialize,Serialize};
-use std::{time::{Instant,Duration}, fmt::Display, vec};
-use std::fmt::Debug;
-use vcg_auction::vcg_base_types::{Price,Good,Player, VCGOutput,Pairing, GoodWPrice};
-use ndarray::{Array1,Array2};
+use std::{time};
 use crate::{ext_types::*, vcg_auction_owner::VCG_Auction_Owner};
 use crate::client_bid_info::ClientBidInfo;
 use log::{debug,log};
 use env_logger::{Builder, Target};
-
-
+use crate::vcg_auction_postprocessor::VCGPostProcessor;
 
 
 
@@ -25,10 +21,14 @@ pub fn vcg_routine(bid_info : ClientBidInfo) -> VCGOutputContent{
     debug!("buffer is {:?}",vcg_auction.bids);
     debug!("masks are {:?}",vcg_auction.masks);    
     let output = vcg_auction.perform_vcg();
-    let mut buf = output.into_buffer();
-    debug!("buffer is now {:?}",buf);
-    let output_buffer = bid_info.metadata.pairings_int_to_ext(&mut buf);
-    return VCGOutputContent{id : id, output : output_buffer};
+
+    let output_buffer = bid_info.metadata.pairings_int_to_ext(&mut output.into_buffer());
+    println!("buffer bef  processing {:?}",output_buffer);
+
+    let output_buff_processed = VCGPostProcessor::new(true,output_buffer,&bid_info).process();
+    println!("buffer is now {:?}",output_buff_processed);
+    return VCGOutputContent{id : id, output : output_buff_processed};
+    
 }
 
 
@@ -37,7 +37,6 @@ pub struct VCGOutputContent{
     pub id : ID,
     pub output : Vec<OutputPairing>,
 }
-
 
 #[cfg(test)]
 mod vcg_auction_tests {
@@ -78,7 +77,7 @@ mod vcg_auction_tests {
         };
         let client_bid_info = ClientBidInfo::try_from(content).unwrap();
         let output = vcg_auction_routine::vcg_routine(client_bid_info);
-        let output_pl_ids = output.output.iter().map(|x| {
+        let output_pl_ids : Vec<(usize,Option<usize>)> = output.output.iter().map(|x| {
             match &x.good_color_price {
                 Some(good_w_pr) => (x.pl.id,Some(good_w_pr.good.id)),
                 None => (x.pl.id,None),
@@ -89,8 +88,11 @@ mod vcg_auction_tests {
             (3,Some(4)),
             (4,Some(2)),
         ];
-        println!("{:?}",output_pl_ids);
-        check_vec(output_pl_ids, exp_vec)
+        let exp_leftovers = vec![(2,Some(1)),(2,Some(5)),(2,Some(6))];
+        assert_eq!(output_pl_ids.len(),4);
+        assert!(exp_vec.iter().all(|exp_elem|output_pl_ids.contains(&exp_elem)));
+        assert!(exp_leftovers.iter().any(|exp_elem|output_pl_ids.contains(&exp_elem)));
+        
     }
 
     

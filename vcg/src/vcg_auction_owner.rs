@@ -20,8 +20,8 @@ impl VCG_Auction_Owner {
     }
 
     pub fn from_bid_info<'a>(bid_info : &'a ClientBidInfo) -> Self{
-        let nr_goods = bid_info.metadata.goods.len();
-        let nr_players = bid_info.metadata.players.len();
+        let nr_goods = bid_info.metadata.goods_active.len();
+        let nr_players = bid_info.metadata.players_active.len();
         let masks = Array2::<usize>::from_diag(&Array1::ones(nr_goods));
         let mut bids_buffer_to_array = vec![0;nr_players * nr_goods];
         for (pl,good,pr) in bid_info.bid_buffer.iter(){

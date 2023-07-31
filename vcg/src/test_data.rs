@@ -62,10 +62,11 @@ pub mod test_utils {
 
 
     pub fn check_vec<T : Eq + Debug>(vec1 : Vec<T>,vec2 : Vec<T>){
-        assert_eq!(vec1.len(),vec2.len());
         for (ind,(elem1,elem2)) in vec1.iter().zip(vec2.iter()).enumerate(){
             assert!(elem1 == elem2,"vec1 not equal vec2 at index {:?} : {:?} != {:?}",ind,elem1,elem2);
         }
+        assert_eq!(vec1.len(),vec2.len(),"all elements checked where equal, but vec left had length {} and vec right had length {}",vec1.len(),vec2.len());
+
     }
 
 
