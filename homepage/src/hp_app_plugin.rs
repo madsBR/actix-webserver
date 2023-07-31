@@ -20,24 +20,20 @@ const ROOT_REDIR : &str = "home";
 #[get("/home")]
 async fn front_page() -> impl Responder {
     let page = HPTemplate::new(SCOPE).render();
-//    let page : Result<&str,usize> = Ok("hej");
-    let response = match page{
+    match page{
      Ok(page) => HttpResponse::Ok().body(page),
     _ => HttpResponse::InternalServerError().into(),
-    };
-    response
+    }
 }
 
 
 #[get("/resume")]
 async fn resume() -> impl Responder {
     let page = CVTemplate::new(SCOPE).render();
-//    let page : Result<&str,usize> = Ok("hej");
-    let response = match page{
+    match page{
      Ok(page) => HttpResponse::Ok().body(page),
     _ => HttpResponse::InternalServerError().into(),
-    };
-    response
+    }
 }
 
 

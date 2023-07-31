@@ -1,8 +1,6 @@
 use crate::bid_post_back_content::BidPostBackContent;
 use crate::ext_types::{GoodExt, GoodWPriceExt, OutputPairing, PlayerExt, ID};
-use std::{
-    time::{Instant}
-};
+use std::{time::{Instant}};
 use tinyvec::TinyVec;
 use vcg_auction::vcg_base_types::{Good, GoodWPrice, Pairing, Player, Price};
 
@@ -15,7 +13,7 @@ pub struct ContentMetaData {
 }
 
 impl ContentMetaData {
-    pub fn from_content_vals(bid_pairings : &Vec<(usize,Option<usize>,usize)>,cont_pls : TinyVec<[PlayerExt;5]>,cont_goods : TinyVec<[GoodExt;10]>) -> Result<Self, String> {
+    pub fn from_content_vals(bid_pairings : &[(usize,Option<usize>,usize)],cont_pls : TinyVec<[PlayerExt;5]>,cont_goods : TinyVec<[GoodExt;10]>) -> Result<Self, String> {
         let mut pl_ids: Vec<usize> = Vec::new();
         let mut good_ids: Vec<usize> = Vec::new();
         let mut bid_counter: usize = 0;
@@ -66,12 +64,12 @@ impl ContentMetaData {
     }
 
     #[inline]
-    pub fn player_int_to_ext<'a>(&'a self, pl: Player) -> &'a PlayerExt {
+    pub fn player_int_to_ext(&self, pl: Player) -> &PlayerExt {
         &self.players_active[usize::from(pl)]
     }
 
     #[inline]
-    pub fn good_int_to_ext<'a>(&'a self, good: Good) -> &'a GoodExt {
+    pub fn good_int_to_ext(&self, good: Good) -> &GoodExt {
         &self.goods_active[usize::from(good)]
     }
 
@@ -91,19 +89,19 @@ impl ContentMetaData {
     #[inline]
     pub fn pairing_int_to_ext(&self, pair: Pairing) -> OutputPairing {
         let Pairing {
-            pl: pl,
-            bought_good: bought_good,
+            pl,
+            bought_good,
         } = pair;
-        let pl_ext = self.player_int_to_ext(pl);
+        let _pl_ext = self.player_int_to_ext(pl);
         match bought_good {
             Some(GoodWPrice {
-                good: good,
-                price: price,
+                good,
+                price,
             }) => self.some_pairing_int_to_ext(
                 pl,
                 GoodWPrice {
-                    good: good,
-                    price: price,
+                    good,
+                    price,
                 },
             ),
             None => OutputPairing {
@@ -113,7 +111,7 @@ impl ContentMetaData {
         }
     }
 
-    pub fn pairings_int_to_ext(&self, vec: &mut Vec<Pairing>) -> Vec<OutputPairing> {
+    pub fn pairings_int_to_ext(&self, vec: &mut [Pairing]) -> Vec<OutputPairing> {
         vec.iter().map(|x| self.pairing_int_to_ext(*x)).collect()
     }
 }
@@ -138,12 +136,12 @@ impl TryFrom<BidPostBackContent> for ClientBidInfo {
                     id: content.id.unwrap_or_else(ID::new_random),
                     bid_buffer: bid_pair_builder.parse_bid_pairings(),
                     created_at: instant,
-                    metadata: metadata,
+                    metadata,
                 };
-                return Ok(cli_bid_info);
+                Ok(cli_bid_info)
             }
             Err(str) => {
-                return Err(str);
+                Err(str)
             }
         }
     }
@@ -165,9 +163,9 @@ impl<'a> BidPairingBuilder<'a> {
         content_bid_pairs: Vec<(usize, Option<usize>, usize)>
     ) -> Self {
         Self {
-            metadt: metadt,
+            metadt,
             result: Vec::with_capacity(content_bid_pairs.len()),
-            content_bid_pairs: content_bid_pairs,
+            content_bid_pairs,
             pl_ind: 0,
             good_ind: 0,
         }
@@ -209,13 +207,9 @@ mod tests {
     use super::*;
     use crate::bid_post_back_content::BidPostBackContent;
     use crate::test_data::test_utils::{
-        get_test_data_bad_good, get_test_data_bad_pl, get_test_data_valid,
+        get_test_data_bad_good, get_test_data_valid,
     };
-    use crate::{
-        ext_types::{GoodExt, PlayerExt},
-        test_data::test_utils::check_vec,
-    };
-    use tinyvec::{tiny_vec, TinyVec};
+    use crate::{test_data::test_utils::check_vec};
     #[test]
     fn test_create_metadata_bad_pl() {
         let (id, pls, goods, bids) = get_test_data_bad_good();

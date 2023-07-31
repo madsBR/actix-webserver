@@ -1,8 +1,8 @@
-use crate::ext_types::{Color, GoodExt, GoodWPriceExt, PlayerExt, ID};
+use crate::ext_types::{GoodExt, PlayerExt, ID};
 use serde::{Deserialize, Serialize};
 use std::fmt::Debug;
 use tinyvec::TinyVec;
-use vcg_auction::vcg_base_types::{Good, GoodWPrice, Pairing, Player, Price};
+
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct BidPostBackContent {

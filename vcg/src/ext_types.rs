@@ -1,8 +1,7 @@
-
-use vcg_auction::vcg_base_types::{Price,Good,Player, Pairing, GoodWPrice};
+use vcg_auction::vcg_base_types::{Price};
 use serde::{Deserialize,Serialize,Deserializer};
-use std::{fmt::Display, error::Error};
-use tinyvec::TinyVec;
+use std::{fmt::Display};
+
 use std::fmt::Debug;
 use regex::Regex;
 use lazy_static::lazy_static;
@@ -11,8 +10,7 @@ use lazy_static::lazy_static;
 
 fn is_valid_hexadecimal(input: &str) -> bool {
 
-    lazy_static! {
-        
+    lazy_static! {        
         static ref RE: Regex = Regex::new(r"^(#)?[0-9a-fA-F]+$").unwrap();
     }    
     RE.is_match(input)
@@ -55,13 +53,13 @@ pub struct Color {
 impl TryFrom<&str> for Color{
     type Error = String;
     fn try_from(hexa_decimal: &str) -> Result<Self, Self::Error> {
-        if is_valid_hexadecimal(&hexa_decimal){
+        if is_valid_hexadecimal(hexa_decimal){
             Ok(Color { str: hexa_decimal.to_string() })
         }
 
         else{
             let mut err_msg = "this string is not valid hexadecimal".to_string();
-            err_msg.push_str(&hexa_decimal);
+            err_msg.push_str(hexa_decimal);
             Err(err_msg)
         }
     }
@@ -139,7 +137,7 @@ pub struct ID(u128);
 
 impl ID{
     pub fn new_random() -> Self{
-        Self{0 : fastrand::u128(1<<127..)}
+        Self(fastrand::u128(1<<127..))
     }
 }
 

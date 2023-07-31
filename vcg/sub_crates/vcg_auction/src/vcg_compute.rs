@@ -1,9 +1,6 @@
 use itertools::Itertools;
-use ndarray::{Array2,Zip, Array, Array1,s, Axis, ViewRepr, ArrayView2, IntoNdProducer};
-use strum::{IntoEnumIterator,EnumIter};
-use itertools::Combinations;
+use ndarray::{Array1,s, Axis, ArrayView2};
 use crate::vcg_base_types::{Player,Good,VCGOutput, Price};
-use rustc_hash::FxHashMap;
 use crate::iterator_as::{IteratorAsTr,IntoIteratorAsTr};
 
 
@@ -17,7 +14,7 @@ pub struct VCG_Computer_Out{
 
 impl<'a> From<VCG_Computer<'a>> for VCG_Computer_Out{
     fn from(vcg_computer: VCG_Computer) -> Self {
-        Self { best_bid_sum: vcg_computer.best_bid_sum.into(), best_pairings: vcg_computer.best_pairings.into_iter().enumerate().take_while(|(ind,x)| x.is_some()).map(|(x,y)| (x.into(),y.unwrap())).collect_vec() }        
+        Self { best_bid_sum: vcg_computer.best_bid_sum.into(), best_pairings: vcg_computer.best_pairings.into_iter().enumerate().take_while(|(_ind,x)| x.is_some()).map(|(x,y)| (x.into(),y.unwrap())).collect_vec() }        
     }
 }
 
@@ -40,7 +37,7 @@ pub struct VCG_Computer<'a>{
 impl<'a> VCG_Computer<'a>{
     pub fn new(nr_players : usize, nr_goods : usize,masks : ArrayView2<'a,usize>,bids : ArrayView2<'a,usize>) -> Self{
         let last_player = nr_players -1;
-        let mut lagged_pairing_status : [Good;Player::MAX_PLAYERS]= [Good{val : 0};Player::MAX_PLAYERS];
+        let lagged_pairing_status : [Good;Player::MAX_PLAYERS]= [Good{val : 0};Player::MAX_PLAYERS];
         let mask_stack = Array1::zeros(nr_goods);
         let best_pairings = [None;Player::MAX_PLAYERS];
         //println!("constructed with mask_stack {:?}, masks {:?} and current pairing status {:?} bids are {:?}",mask_stack,masks,lagged_pairing_status.iter().map(|x| x.val).collect_vec(),bids);
@@ -86,7 +83,7 @@ impl<'a> VCG_Computer<'a>{
             if let Some(next_good) = self.is_stack_top(pl.into()){
                 println!("Decre_masks::found top stack : player {} ",{pl});
                
-                return(Some((pl,next_good)))
+                return Some((pl,next_good))
             } else{
                 println!("Decre_masks::removing for player {} ",pl);
                 self.remove_masks_and_bid_on_stack(self.good_of_pl(pl.into()), &pl.into())            
@@ -103,7 +100,7 @@ impl<'a> VCG_Computer<'a>{
 
     fn increment_masks_and_bids_and_update_goods(&mut self,stack_top : usize){
         println!("incr masks :: started with {}. mask stack is {}",stack_top,self.mask_stack);
-        for pl in (stack_top + 1..self.last_player){
+        for pl in stack_top + 1..self.last_player{
             let first_available_good = self.next_unmasked_good_for_player(&pl.into()).unwrap_or_else(|| self.first_unmasked_good());
             self.lagged_pairing_status[pl]  = first_available_good;
 

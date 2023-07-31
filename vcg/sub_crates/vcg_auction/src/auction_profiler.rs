@@ -1,5 +1,5 @@
 use std::time::{Duration,Instant};
-use ndarray::{Array1,Array2};
+use ndarray::{Array2};
 use crate::{vcg_auction::VCG_Auction, vcg_base_types::Player};
 
 

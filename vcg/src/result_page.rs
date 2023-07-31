@@ -1,5 +1,5 @@
 use askama::Template;
-use crate::{vcg_auction_routine::{self, VCGOutputContent}, ext_types::{OutputPairing, GoodWPriceExt}};
+use crate::{vcg_auction_routine::{VCGOutputContent}, ext_types::{OutputPairing, GoodWPriceExt}};
 
 #[derive(Template)]
 #[template(path="result_page.html",escape="none")]
@@ -9,7 +9,7 @@ pub struct VCGResultTemplate<'a> {
 
 impl<'a> From<&'a VCGOutputContent> for VCGResultTemplate<'a>{
    fn from(value: &'a VCGOutputContent) -> Self {
-       let z : Vec<Row<'a>> = value.output.iter().map(|x| Row::from(x)).collect();
+       let z : Vec<Row<'a>> = value.output.iter().map(Row::from).collect();
        Self { rows: z }
    }   
 }

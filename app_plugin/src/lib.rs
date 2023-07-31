@@ -1,8 +1,6 @@
-use std::marker::PhantomData;
 use async_trait::async_trait; //should be temporary until async fn is stable
-use actix_web::web::{Data, ServiceConfig,scope, redirect};
+use actix_web::web::{ServiceConfig,scope, redirect};
 pub mod logger;
-use actix_files::NamedFile;
 use actix_files as fs;
 
 

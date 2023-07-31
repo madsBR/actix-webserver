@@ -1,4 +1,4 @@
-use std::fmt;
+
 use askama::Template;
 
 
@@ -10,7 +10,7 @@ pub struct IndexTemplate {
 
 impl IndexTemplate{
     pub fn new(scope : &'static str) -> Self{
-        IndexTemplate{scope : scope}
+        IndexTemplate{scope}
     }
 }
  

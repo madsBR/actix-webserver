@@ -1,42 +1,41 @@
-use actix_web::dev::Service;
-use actix_web::web::{Data, ServiceConfig,scope};
-use actix_web::{get,post, web::{self,ReqData, Json,Redirect,redirect}, App, HttpResponse, HttpServer, Responder};
-use image::{ImageFormat,load_from_memory_with_format};
-use actix_files as fs;
-use actix_files::{NamedFile};
-use std::io::Read;
+
+use actix_web::web::{ServiceConfig};
+use actix_web::{get,post, HttpResponse, Responder};
+
+
+
 use app_plugin::AppPlugin;
 use async_trait::async_trait;
-use std::path::PathBuf;
+
 use crate::bid_post_back_content::BidPostBackContent;
-use crate::ext_types::{Color};
-use crate::vcg_auction_routine::{self, vcg_routine};
+
+use crate::vcg_auction_routine::{vcg_routine};
 use crate::client_bid_info::ClientBidInfo;
-use serde::{Deserialize,Serialize};
-use vcg_auction::vcg_base_types::{VCGOutput, Pairing};
-use vcg_auction_routine::{VCGOutputContent};
-use std::env;
-use regex::Regex;
+
+
+
+
+
 use crate::result_page::{VCGResultTemplate};
 use askama::Template;
-use askama::Error as AskaErr;
-use log::debug;
-use std::fmt::format;
+
+
+
 use crate::index_template::IndexTemplate;
 
 
-const SCOPE : &'static str = "vcg";
+const SCOPE : &str = "vcg";
 
 pub struct VcgAppConfig{}
-const ROOT_REDIR : &'static str = "app";
+const ROOT_REDIR : &str = "app";
 #[get("/app")]
 async fn app() -> impl Responder {
     let page = IndexTemplate::new(SCOPE).render();    
-    let response = match page{
+    
+    match page{
      Ok(page) => HttpResponse::Ok().body(page),
     _ => HttpResponse::InternalServerError().into(),
-    };
-    response
+    }
 }
 
 
@@ -61,11 +60,11 @@ async fn submit_bids(content : String) -> impl Responder {
             _ => HttpResponse::InternalServerError().into(),
             };
             log::debug!("responding {:?}",response);
-            return(response);
+            response
         }
         Err(str) => {
             log::debug!("Failed to translate postback content to client bid info");
-            return(HttpResponse::BadRequest().body(str));
+            HttpResponse::BadRequest().body(str)
         }
     }
 }
@@ -113,13 +112,14 @@ impl AppPlugin for VcgAppConfig {
 
 #[cfg(test)]
 mod tests {
-    use crate::ext_types::{GoodExt, PlayerExt};
-
+    use crate::ext_types::{GoodExt, PlayerExt,Color};
+    use serde::Deserialize;
 
     #[derive(Debug, Deserialize)]
     pub struct ColorWrap {
         col: Color
     }
+    use regex::Regex;
 
     use super::*;
 

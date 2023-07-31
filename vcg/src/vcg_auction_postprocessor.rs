@@ -1,4 +1,4 @@
-use vcg_auction::vcg_base_types::{Player,Good,VCGOutput, Pairing, GoodWPrice};
+
 use itertools::Itertools;
 use crate::{client_bid_info::ClientBidInfo, ext_types::{OutputPairing, GoodExt, PlayerExt, GoodWPriceExt}};
 use rand::prelude::*;
@@ -14,9 +14,9 @@ impl<'a> VCGPostProcessor<'a>{
 
     pub fn new(distribute_leftovers : bool, vcg_output : Vec<OutputPairing>, cli_info : &'a ClientBidInfo) -> Self{
         VCGPostProcessor{
-            distribute_leftovers : distribute_leftovers,
-            vcg_output : vcg_output,
-            cli_info : cli_info,
+            distribute_leftovers,
+            vcg_output,
+            cli_info,
         }
     }
 
@@ -30,7 +30,7 @@ impl<'a> VCGPostProcessor<'a>{
         let mut inp_pls = self.cli_info.metadata.players_total.iter();
         while assigns_remaining>0 {
             let pl = inp_pls.next().unwrap();
-            if self.vcg_output.iter().find(|x| &x.pl == pl).is_none(){
+            if !self.vcg_output.iter().any(|x| &x.pl == pl){
                 self.assign(pl, &leftover_goods.pop().unwrap(), &mut assigns_remaining);
             }
             
@@ -48,8 +48,8 @@ impl<'a> VCGPostProcessor<'a>{
         self.vcg_output
     }
 
-    fn pairs_has_good(good_ext : &GoodExt,vec : &Vec<OutputPairing>) -> bool{
-        vec.iter().find(|x| x.good_color_price.as_ref().unwrap().good.id == good_ext.id).is_some()
+    fn pairs_has_good(good_ext : &GoodExt,vec : &[OutputPairing]) -> bool{
+        vec.iter().any(|x| x.good_color_price.as_ref().unwrap().good.id == good_ext.id)
     }
 
     fn get_leftover_goods(&self) -> Vec<GoodExt>{

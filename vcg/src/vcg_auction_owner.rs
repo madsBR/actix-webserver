@@ -11,15 +11,15 @@ pub struct VCG_Auction_Owner{
 impl VCG_Auction_Owner {
     pub fn perform_vcg(&self) -> VCGOutput{
         let mut vcg_auction = VCG_Auction::new(self.masks.view(), self.bids.view());
-        let res = vcg_auction.run();
-        res
+        
+        vcg_auction.run()
     }
     
     pub fn new(bids : Array2<usize>, masks : Array2<usize>)-> Self{
-        VCG_Auction_Owner { bids: bids, masks: masks }
+        VCG_Auction_Owner { bids, masks }
     }
 
-    pub fn from_bid_info<'a>(bid_info : &'a ClientBidInfo) -> Self{
+    pub fn from_bid_info(bid_info : &ClientBidInfo) -> Self{
         let nr_goods = bid_info.metadata.goods_active.len();
         let nr_players = bid_info.metadata.players_active.len();
         let masks = Array2::<usize>::from_diag(&Array1::ones(nr_goods));

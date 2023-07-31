@@ -1,7 +1,7 @@
 use crate::vcg_compute::{VCG_Computer,VCG_Computer_Out};
 use crate::iterator_as::*;
 use crate::vcg_base_types::{Good,Player, VCGOutput, Price, Pairing,GoodWPrice};
-use ndarray::{Array1,Array2,Axis,ArrayView2};
+use ndarray::{Axis,ArrayView2};
 use itertools::Itertools;
 use rustc_hash::FxHashMap;
 
@@ -53,7 +53,7 @@ impl<'a> VCG_Auction<'a>{
     fn assign_sub_prices_unsaturated(&self,vcg_output : &mut VCGOutput){
         //if self.nr_goods<self.nr_players
         
-        for ind in (0..vcg_output.nr_players()){
+        for ind in 0..vcg_output.nr_players(){
             let winning_pl = vcg_output[ind].pl;
             let alt_cost = (0..self.nr_players).into_iter_as::<Player>().filter(|pl| *pl!= winning_pl).combinations(self.nr_goods)
                 .map(|alt_combi| self.auctions[&alt_combi].best_bid_sum)
@@ -64,7 +64,7 @@ impl<'a> VCG_Auction<'a>{
 
     fn assign_sub_prices_saturated(&self,vcg_output : &mut VCGOutput){
         //if self.nr_goods>=self.nr_players
-        for ind in (0..vcg_output.nr_players()){
+        for ind in 0..vcg_output.nr_players(){
             let winning_pl = vcg_output[ind].pl;
             let alt_cost = (0..self.nr_players).into_iter_as::<Player>().filter(|pl| *pl!= winning_pl).combinations(self.nr_players - 1).map(
                 |alt_combi| {

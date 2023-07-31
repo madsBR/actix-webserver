@@ -1,10 +1,10 @@
-use actix_web::{get, web, App, HttpServer, Responder};
-use serde::{Deserialize,Serialize};
-use std::{time};
+
+use serde::{Serialize};
+
 use crate::{ext_types::*, vcg_auction_owner::VCG_Auction_Owner};
 use crate::client_bid_info::ClientBidInfo;
-use log::{debug,log};
-use env_logger::{Builder, Target};
+use log::{debug};
+
 use crate::vcg_auction_postprocessor::VCGPostProcessor;
 
 
@@ -27,7 +27,7 @@ pub fn vcg_routine(bid_info : ClientBidInfo) -> VCGOutputContent{
 
     let output_buff_processed = VCGPostProcessor::new(true,output_buffer,&bid_info).process();
     println!("buffer is now {:?}",output_buff_processed);
-    return VCGOutputContent{id : id, output : output_buff_processed};
+    VCGOutputContent{id, output : output_buff_processed}
     
 }
 
