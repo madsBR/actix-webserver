@@ -33,12 +33,12 @@ jobs:
           context: .
           load: true
           target: rust_builder
-          tags: homepage:test
+          tags: homepage:rust_builder
           build-args: BRANCH=${{ github.ref_name }}
           
       - name: Test
         run: |
-          docker run --rm -it homepage:test cargo test -p vcg -p homepage -p app_plugin --release --lib
+          docker run --rm homepage:rust_builder cargo test -p vcg -p homepage -p app_plugin --release --lib
 
       - name: Build and push
         uses: docker/build-push-action@v4
