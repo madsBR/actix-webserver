@@ -1,3 +1,15 @@
+#![allow(
+    non_camel_case_types,
+    non_snake_case,
+    non_upper_case_globals,
+    non_camel_case_types,
+    unused_imports,
+    unused_import_braces,
+    dead_code,
+    clippy::redundant_field_names,
+)]
+
+
 use actix_web::web::{Data, ServiceConfig,scope};
 use actix_web::{middleware as mw,get,post, web::{self,ReqData, Json,Redirect,redirect}, App, HttpResponse, HttpServer, Responder};
 use image::{ImageFormat,load_from_memory_with_format};
