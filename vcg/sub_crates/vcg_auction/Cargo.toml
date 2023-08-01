@@ -10,6 +10,5 @@ doctest = false
 [dependencies]
 ndarray = "*"
 itertools = "*"
-strum =  { version = "*", features = ["derive"] }
 rustc-hash ="*"
 serde = {version = "*", features = ["derive"]}

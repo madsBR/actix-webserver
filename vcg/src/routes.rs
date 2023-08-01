@@ -11,7 +11,7 @@ use crate::bid_post_back_content::BidPostBackContent;
 
 use crate::vcg_auction_routine::{vcg_routine};
 use crate::client_bid_info::ClientBidInfo;
-
+use crate::scope::SCOPE;
 
 
 
@@ -24,7 +24,6 @@ use askama::Template;
 use crate::index_template::IndexTemplate;
 
 
-const SCOPE : &str = "vcg";
 
 pub struct VcgAppConfig{}
 const ROOT_REDIR : &str = "app";
@@ -48,13 +47,14 @@ MAYBE: If player in pls vector then pls should get assigned a good as if plaer b
 */
 #[post("/app/submit_bids")]
 async fn submit_bids(content : String) -> impl Responder {
+    println!("content receieved : {}",content);
     let content: BidPostBackContent = serde_json::from_str(&content).unwrap();
     log::debug!("received bids {:?}",content);
     match ClientBidInfo::try_from(content){
         Ok(cli_bid_info) => {    
             log::debug!("succesfully formatted postback into client bid info");
         let resp_content = vcg_routine(cli_bid_info);
-            let page_result = VCGResultTemplate::from(&resp_content).render();
+            let page_result = VCGResultTemplate::new().render();
             let response = match page_result{
             Ok(page) => HttpResponse::Ok().body(page),
             _ => HttpResponse::InternalServerError().into(),
@@ -115,19 +115,15 @@ mod tests {
     use crate::ext_types::{GoodExt, PlayerExt,Color};
     use serde::Deserialize;
 
-    #[derive(Debug, Deserialize)]
-    pub struct ColorWrap {
-        col: Color
-    }
     use regex::Regex;
 
     use super::*;
 
     #[test]
     fn deser_col() {
-        let json_string = r#"{"col": "ABC123"}"#;
-        let color_wrap: ColorWrap = serde_json::from_str(json_string).unwrap();
-        println!("{:?}", color_wrap);
+        let json_string = r#"{"str": "ABC123"}"#;
+        let color_wrap: Color = serde_json::from_str(json_string).unwrap();
+        assert_eq!(color_wrap.str,"ABC123");
     }
 
     #[test]
@@ -137,7 +133,7 @@ mod tests {
         {
             "id": 24,
             "name": "Example Good",
-            "color": "ABC123"
+            "color": {"str": "ABC123"}
         }
         "#;
         let v : GoodExt = serde_json::from_str(json).unwrap();
@@ -147,7 +143,7 @@ mod tests {
         {
             "id": 24,
             "name": "Example Good",
-            "color": "ABC123"
+            "color": {"str": "ABC123"}
         }
         "#;
         let v : GoodExt = serde_json::from_str(json).unwrap();
@@ -164,8 +160,29 @@ mod tests {
 
 
 
+
     }
 
+
+    #[test]
+    fn parse_content_json(){
+        let content_json = r##"{
+            "id":8295960347037019,
+            "player_nr":2,
+            "pls":[{"id":0,"name":"a"},{"id":1,"name":"b"}],
+            "goods":[{
+                "id":0,"name":"Firaks","color":{"str":"#808B96"}},
+                {"id":1,"name":"Ivits","color":{"str":"#FF0000"}},
+                {"id":2,"name":"Terran","color":{"str":"#0000FF"}},
+                {"id":3,"name":"Xenon","color":{"str":"#FFFF00"}},
+                {"id":4,"name":"Geoden","color":{"str":"#F39c12"}},
+                {"id":5,"name":"Itars","color":{"str":"#FFFFFF"}},
+                {"id":6,"name":"none","color":{"str":"#FFFFFF"}}],
+                "bid_pairings":[[0,0,2],[0,1,4],[1,0,3],[1,1,5]]}"##;
+    let content: Result<BidPostBackContent,serde_json::Error> = serde_json::from_str(content_json);
+    assert!(content.is_ok(),"there was an error in reading json {}. ERROR received: {}",content_json,content.err().unwrap().to_string());
+            
+    }
     #[test]
     fn test_regex(){
         let RE: Regex = Regex::new(r"^(#)?[0-9a-fA-F]+$").unwrap();

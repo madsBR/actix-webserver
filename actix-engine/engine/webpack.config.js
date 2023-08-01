@@ -18,6 +18,7 @@ module.exports = {
       {
         test: /\.ts$/, // Match .ts files
         use: 'ts-loader', // Use ts-loader to transpile TypeScript
+        
         exclude: /node_modules/,
       },
     ],

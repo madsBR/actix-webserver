@@ -8,7 +8,6 @@ edition = "2021"
 [dependencies]
 app_plugin = {path="../app_plugin"}
 actix-web = "4.*"
-image = "*"
 reqwest = { version = "*", features = ["json"] }
 tokio = { version = "*", features = ["full"] }
 actix-files = "*"
@@ -16,7 +15,7 @@ async-trait = "*"
 serde = {version = "*", features = ["derive"]}
 vcg_auction = { path="./sub_crates/vcg_auction"}
 tinyvec = {version = "*",features = ['alloc','rustc_1_40','serde']}
-fastrand = "2.0.0"
+fastrand = "2.*"
 ndarray = "*"
 askama = "*"
 serde_json = "*"

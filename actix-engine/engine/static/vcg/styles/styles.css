@@ -20,3 +20,39 @@
     display: none;
   }
   
+
+
+trh {
+  opacity: 1;
+  color: black;
+  font-weight: bold;
+}
+
+tr:hover {
+  background-color: lightgray;
+}
+
+tr {
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+}
+
+tr.fade-in {
+  opacity: 1;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* Add padding to the table cells */
+td,
+th {
+  padding: 8px;
+}
+
+/* Add some spacing inside the cells between text and border */
+td {
+  text-align: center;
+}

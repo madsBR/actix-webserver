@@ -1,48 +1,24 @@
+{% extends "frame.html" %}
 <!DOCTYPE html>
-<html>
-<head>
-    <title>HTML Template with Placeholders</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ccc;
-        }
-        
-        .row {
-            display: table-row;
-            background-color: #f2f2f2;
-            transition: background-color 0.3s ease;
-        }
-        
-        .row:hover {
-            background-color: #e6e6e6;
-        }
-    </style>
-</head>
-<body>
-    <table>
-        <tr>
-            <th>Name </th>
-            <th>Good </th>
-            <th>Price</th>
+
+
+  {% block title %}VCG Auction Result{% endblock %}
+  {% block head %}
+  <link rel="stylesheet" type="text/css" href="/{{scope}}/static/styles/styles.css">
+{% endblock %}  
+{% block content %}
+  <body>
+    <table id="outputPairingTable">
+      <thead>
+        <tr class='fade-in'>
+          <th>Player</th>
+          <th>Good</th>
+          <th>Price</th>
         </tr>
-        {% for s in rows.as_slice() -%}
-            {{ s }}
-        {% endfor %}
-     
+      </thead>
+      <tbody>
+        <!-- Rows will be dynamically added here -->
+      </tbody>
     </table>
-</body>
-</html>
-
-
+  </body>
+  {% endblock %}

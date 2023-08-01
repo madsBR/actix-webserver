@@ -1,5 +1,6 @@
 import { toggleOption, validateInput, colorCodeToInteger, integerToColorCode, getPushBackUrl, createRow, clearRow, has_null_good_selected } from './helpers';
 import {  GoodExt, PlayerExt,createPlayerExt, goods, NULL_GOOD } from './objects';
+import { createResultRows, dummy_data } from './resultpage';
 declare global {
   interface Window {
     validateInput: (input: HTMLInputElement) => boolean;
@@ -89,15 +90,21 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.innerHTML = html;
             // Process the response from the server
           })
+          .then(() => {
+            console.log('CALLING CREATE RES ROWS');
+            createResultRows(dummy_data)
+          })
           .catch(error => {
             console.error('Error:', error);
             // Handle errors
-          });
+          }
+          
+          );
       } else {
         clearRow(rowContainer.getElementsByClassName('row') as HTMLCollectionOf<HTMLDivElement>);
         (document.getElementById('name') as HTMLInputElement).value = '';
       }
-
+      
       //console.log("content bid pairings:" + content.bid_pairings.toString());
     }
   };

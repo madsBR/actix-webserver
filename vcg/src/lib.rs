@@ -20,6 +20,6 @@ mod index_template;
 mod client_bid_info;
 mod bid_post_back_content;
 mod vcg_auction_postprocessor;
-
+mod scope;
 #[cfg(test)]
 mod test_data;

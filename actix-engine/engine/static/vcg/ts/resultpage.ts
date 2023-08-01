@@ -1,5 +1,5 @@
 import { PlayerExt,GoodWPriceExt,OutputPairing } from "./objects";
-
+export {createResultRows,dummy_data}
 const jsonString = `[
     {
       "pl": {
@@ -38,7 +38,7 @@ const jsonString = `[
       }
     }
   ]`;
-    
+const dummy_data : OutputPairing[] = JSON.parse(jsonString)
   // Assuming you have the parsedData array from the previous step
   
   // Interface for the row data with the required fields
@@ -118,7 +118,7 @@ const jsonString = `[
   }
   
   // Function to create rows dynamically with a delay of 0.5 seconds between each row
-  function createRows(data: OutputPairing[]) {
+  function createResultRows(data: OutputPairing[]) {
     const tableBody : HTMLTableSectionElement | null= document.querySelector('#outputPairingTable tbody');
     if (tableBody != null){
         addRowWithDelay(tableBody, data, 0); // Start creating rows with a delay

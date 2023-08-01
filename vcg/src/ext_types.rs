@@ -45,7 +45,7 @@ pub struct GoodWPriceExt{
 
 
 
-#[derive(Debug,Serialize,PartialEq,Eq,Default,Clone,PartialOrd, Ord)]
+#[derive(Debug,Serialize,PartialEq,Eq,Default,Clone,PartialOrd, Ord,Deserialize)]
 pub struct Color {
     pub str: String,
 }
@@ -65,7 +65,7 @@ impl TryFrom<&str> for Color{
     }
 }
 
-
+/*
 impl<'de> Deserialize<'de> for Color {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where D: Deserializer<'de>,
@@ -81,7 +81,7 @@ impl<'de> Deserialize<'de> for Color {
         }
     }
 }
-
+ */
 
 
 
