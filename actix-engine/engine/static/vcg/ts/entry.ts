@@ -1,5 +1,5 @@
 import { toggleOption, validateInput, colorCodeToInteger, integerToColorCode, getPushBackUrl, createRow, clearRow, has_null_good_selected } from './helpers';
-import { GoodObj, PlayerObj,createPlayerObj,createGoodObj, goods, NULL_GOOD } from './objects';
+import {  GoodExt, PlayerExt,createPlayerExt, goods, NULL_GOOD } from './objects';
 declare global {
   interface Window {
     validateInput: (input: HTMLInputElement) => boolean;
@@ -8,8 +8,8 @@ declare global {
 interface Content {
   id: number;
   player_nr: number;
-  pls: PlayerObj[];
-  goods: GoodObj[];
+  pls: PlayerExt[];
+  goods: GoodExt[];
   bid_pairings: [number, number, number][];
 }
 
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
       document.getElementById('submit-error-msg')!.textContent = 'name is invalid';
     } else {
       document.getElementById('submit-error-msg')!.textContent = '';
-      content.pls.push(createPlayerObj(nr_submitted, nameInput.value));
+      content.pls.push(createPlayerExt(nr_submitted, nameInput.value));
       const rows = rowContainer.getElementsByClassName('row');
       for (let i = 0; i < parseInt(selectN.value); i++) {
         const row = rows[i] as HTMLDivElement;

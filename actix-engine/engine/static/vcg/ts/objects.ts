@@ -1,26 +1,50 @@
-export interface GoodObj {
+export interface GoodExt {
   id: number;
   name: string;
-  color: string;
+  color: Color;
 }
 
-
-export function createGoodObj(id: number, name: string, color: string): GoodObj {
-  return { id, name, color };
+export function createGoodObj(id: number, name: string, col_str: string): GoodExt {
+  let color : Color = {str: col_str};
+  return { id, name, color};
 }
 
-export interface PlayerObj {
+export interface PlayerExt {
   id: number;
   name: string;
 }
 
-export function createPlayerObj(id: number, name: string): PlayerObj {
+export function createPlayerExt(id: number, name: string): PlayerExt {
   return { id, name };
 }
 
-export const NULL_GOOD: GoodObj = createGoodObj(6, 'none', '#FFFFFF');
+export const NULL_GOOD: GoodExt = createGoodObj(6, 'none', '#FFFFFF');
 
-export const goods: GoodObj[] = [
+
+
+export interface Color {
+  str: string;
+}
+
+
+
+export interface Price {
+  val: number;
+}
+
+export interface GoodWPriceExt {
+  good: GoodExt;
+  price: Price;
+}
+
+export interface OutputPairing {
+  pl: PlayerExt;
+  good_color_price: GoodWPriceExt | null;
+}
+
+
+
+export const goods: GoodExt[] = [
   createGoodObj(0, 'Firaks', '#808B96'),
   createGoodObj(1, 'Ivits', '#FF0000'),
   createGoodObj(2, 'Terran', '#0000FF'),

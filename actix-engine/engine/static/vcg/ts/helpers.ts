@@ -1,6 +1,6 @@
-import { NULL_GOOD, GoodObj, goods, NULL_GOOD_INDEX } from './objects';
+import { NULL_GOOD, GoodExt, goods, NULL_GOOD_INDEX } from './objects';
 
-export function is_null_good(good: GoodObj): boolean {
+export function is_null_good(good: GoodExt): boolean {
   return good === NULL_GOOD;
 }
 
@@ -21,7 +21,7 @@ export function toggleOption(optionOn: string, optionOff: string, dropdown: HTML
 
 export function clearRow(rows: HTMLCollectionOf<HTMLDivElement>): void {
   for (let row_ind = 0; row_ind < rows.length; row_ind++) {
-    rows[row_ind].style.backgroundColor = goods[0].color;
+    rows[row_ind].style.backgroundColor = goods[0].color.str;
     (document.getElementById('bidInput' + row_ind) as HTMLInputElement).value = "";
     const dropdown = rows[row_ind].querySelector('select') as HTMLSelectElement;
     dropdown.selectedIndex = NULL_GOOD_INDEX;
@@ -44,7 +44,7 @@ export function createRow(row_index: number,rowContainer: HTMLElement, Choices: 
   dropdown.dataset.index = row_index.toString();
   for (const good of goods) {
     const optionElement = document.createElement('option');
-    optionElement.value = good.color;
+    optionElement.value = good.color.str;
     optionElement.textContent = good.name;
     optionElement.dataset.good_id = good.id.toString();
     dropdown.appendChild(optionElement);
