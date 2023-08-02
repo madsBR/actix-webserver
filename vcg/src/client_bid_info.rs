@@ -1,9 +1,9 @@
 use crate::bid_post_back_content::BidPostBackContent;
-use crate::ext_types::{GoodExt, GoodWPriceExt, OutputPairing, PlayerExt, ID};
+use crate::ext_types::{GoodExt, GoodWPriceExt, OutputPairing, PlayerExt, ID, InputRawPairing};
 use std::{time::{Instant}};
 use tinyvec::TinyVec;
 use vcg_auction::vcg_base_types::{Good, GoodWPrice, Pairing, Player, Price};
-
+use std::rc::Rc;
 pub struct ContentMetaData {
     pub players_active: TinyVec<[PlayerExt; 5]>,
     pub goods_active: TinyVec<[GoodExt; 10]>,
@@ -12,8 +12,9 @@ pub struct ContentMetaData {
     pub goods_total : TinyVec<[GoodExt; 10]>,
 }
 
+
 impl ContentMetaData {
-    pub fn from_content_vals(bid_pairings : &[(usize,Option<usize>,usize)],cont_pls : TinyVec<[PlayerExt;5]>,cont_goods : TinyVec<[GoodExt;10]>) -> Result<Self, String> {
+    pub fn from_content_vals(bid_pairings : &[InputRawPairing],cont_pls : TinyVec<[PlayerExt;5]>,cont_goods : TinyVec<[GoodExt;10]>) -> Result<Self, String> {
         let mut pl_ids: Vec<usize> = Vec::new();
         let mut good_ids: Vec<usize> = Vec::new();
         let mut bid_counter: usize = 0;
@@ -24,8 +25,7 @@ impl ContentMetaData {
                 None
             }
         });
-        for (pl_ext, good_ext) in iter{
-        
+        for (pl_ext, good_ext) in iter{        
             pl_ids.push(pl_ext);
             good_ids.push(good_ext);
             bid_counter += 1;
@@ -123,36 +123,44 @@ pub struct ClientBidInfo {
     pub metadata: ContentMetaData,
 }
 
-impl TryFrom<BidPostBackContent> for ClientBidInfo {
-    type Error = String;
-    fn try_from(content: BidPostBackContent) -> Result<Self, Self::Error> {
-        let metadata_mb = ContentMetaData::from_content_vals(&content.bid_pairings,content.pls,content.goods);
-        
-        match metadata_mb {
-            Ok(metadata) => {
-                let instant = Instant::now();
-                let bid_pair_builder = BidPairingBuilder::new(&metadata, content.bid_pairings);
-                let cli_bid_info = ClientBidInfo {
-                    id: content.id.unwrap_or_else(ID::new_random),
-                    bid_buffer: bid_pair_builder.parse_bid_pairings(),
-                    created_at: instant,
-                    metadata,
-                };
-                Ok(cli_bid_info)
-            }
-            Err(str) => {
-                Err(str)
-            }
-        }
+impl ClientBidInfo{
+    pub fn new(metadata :ContentMetaData, bids :  &[InputRawPairing],id : Option<ID>) -> Self{
+        let instant = Instant::now();
+        let bid_pair_builder = BidPairingBuilder::new(&metadata, bids);
+        let cli_bid_info = ClientBidInfo {
+            id: id.unwrap_or_else(ID::new_random),
+            bid_buffer: bid_pair_builder.parse_bid_pairings(),
+            created_at: instant,
+            metadata,
+        };
+        cli_bid_info
     }
 }
 
 impl ClientBidInfo {}
 
+
+impl BidPostBackContent{
+    pub fn validate_and_unpack(self) -> Result<(ClientBidInfo, Rc<Vec<InputRawPairing>>),String>{
+        let BidPostBackContent{id,player_nr:_player_nr,goods,pls,mut bid_pairings} = self;
+        bid_pairings.sort();
+        let bids = Rc::new(bid_pairings);
+        let metadata_mb = ContentMetaData::from_content_vals(&bids,pls,goods);     
+        match metadata_mb{
+            Ok(metadata) =>{
+                let client_bid_info = ClientBidInfo::new(metadata, &bids, id);
+                Ok((client_bid_info,bids))
+            }
+            Err(str) => Err(str)
+        }
+    }
+}
+
 struct BidPairingBuilder<'a> {
     metadt: &'a ContentMetaData,
     result: Vec<(Player, Good, Price)>,
-    content_bid_pairs: Vec<(usize, Option<usize>, usize)>,
+    content_bid_pairs: &'a [InputRawPairing],
+
     pl_ind: usize,
     good_ind: usize,
 }
@@ -160,7 +168,7 @@ struct BidPairingBuilder<'a> {
 impl<'a> BidPairingBuilder<'a> {
     fn new(
         metadt: &'a ContentMetaData,
-        content_bid_pairs: Vec<(usize, Option<usize>, usize)>
+        content_bid_pairs: &'a [InputRawPairing]
     ) -> Self {
         Self {
             metadt,
@@ -172,7 +180,6 @@ impl<'a> BidPairingBuilder<'a> {
     }
 
     fn parse_bid_pairings(mut self) -> Vec<(Player, Good, Price)> {
-        self.content_bid_pairs.sort();
         for index in 0..self.content_bid_pairs.len() {
             if let (pl_id, Some(good_id), pr) = self.content_bid_pairs[index] {
                 self.update_pl_good(pl_id, good_id);
@@ -263,9 +270,9 @@ mod tests {
             goods,
             bid_pairings: bids,
         };
-        let client_bid_info_mb = ClientBidInfo::try_from(content);
-        assert!(client_bid_info_mb.is_ok());
-        let client_bid_info = client_bid_info_mb.unwrap();
+        let unpacked_content = content.validate_and_unpack();
+        assert!(unpacked_content.is_ok());
+        let (client_bid_info,_) = unpacked_content.unwrap();
 
         let mut x = client_bid_info.bid_buffer;
         x.sort();

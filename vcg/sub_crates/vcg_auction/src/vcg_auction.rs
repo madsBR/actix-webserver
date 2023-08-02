@@ -44,9 +44,7 @@ impl<'a> VCG_Auction<'a>{
             self.auctions.insert(pl_combi, VCG_Computer::new(sub_nr_players, self.nr_goods, sub_masks.view(), sub_bids.view()).compute_into_out());
 
         }
-        println!("auctions are{:?}",self.auctions);
         let winner_combi = self.get_best_sub_auction();
-        println!("WINNER IS output{:?}",winner_combi);
         winner_combi        
     }   
 

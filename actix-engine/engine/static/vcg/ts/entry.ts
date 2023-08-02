@@ -1,6 +1,6 @@
 import { toggleOption, validateInput, colorCodeToInteger, integerToColorCode, getPushBackUrl, createRow, clearRow, has_null_good_selected } from './helpers';
 import {  GoodExt, PlayerExt,createPlayerExt, goods, NULL_GOOD } from './objects';
-import { createResultRows, dummy_data } from './resultpage';
+import { ResultObject, displayResult} from './resultpage';
 declare global {
   interface Window {
     validateInput: (input: HTMLInputElement) => boolean;
@@ -73,8 +73,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       // Send a POST request to the current page's route
       nr_submitted += 1;
-      console.log('players submitted are ' + nr_submitted + ' content is : ' + JSON.stringify(content));
-
       if (nr_submitted === parseInt(selectN.value)) {
         console.log(getPushBackUrl());
         fetch(getPushBackUrl(), {
@@ -84,21 +82,15 @@ document.addEventListener('DOMContentLoaded', function () {
           },
           body: JSON.stringify(content),
         })
-          .then(response => response.text())
-          .then(html => {
-            console.log('RECIEVED RESULT, NOW PUTTING IT IN');
-            document.body.innerHTML = html;
-            // Process the response from the server
-          })
-          .then(() => {
-            console.log('CALLING CREATE RES ROWS');
-            createResultRows(dummy_data)
-          })
+          .then((response) => 
+              response.json()
+            )
+          .then((res_obj : ResultObject) => displayResult(res_obj)
+          )
           .catch(error => {
             console.error('Error:', error);
             // Handle errors
-          }
-          
+          }          
           );
       } else {
         clearRow(rowContainer.getElementsByClassName('row') as HTMLCollectionOf<HTMLDivElement>);

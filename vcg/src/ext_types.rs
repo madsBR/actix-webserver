@@ -7,6 +7,7 @@ use regex::Regex;
 use lazy_static::lazy_static;
 
 
+pub type InputRawPairing =(usize,Option<usize>,usize);
 
 fn is_valid_hexadecimal(input: &str) -> bool {
 

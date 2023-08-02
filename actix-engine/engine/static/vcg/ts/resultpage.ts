@@ -1,52 +1,25 @@
-import { PlayerExt,GoodWPriceExt,OutputPairing } from "./objects";
-export {createResultRows,dummy_data}
-const jsonString = `[
-    {
-      "pl": {
-        "id": 1,
-        "name": "John Doe"
-      },
-      "good_color_price": {
-        "good": {
-          "id": 100,
-          "name": "Toy",
-          "color": {
-            "str": "#00AABB"
-          }
-        },
-        "price": {
-          "val": 50
-        }
-      }
-    },
-    {
-      "pl": {
-        "id": 2,
-        "name": "Jane Smith"
-      },
-      "good_color_price": {
-        "good": {
-          "id": 200,
-          "name": "Book",
-          "color": {
-            "str": "#AAFF11"
-          }
-        },
-        "price": {
-          "val": 30
-        }
-      }
-    }
-  ]`;
-const dummy_data : OutputPairing[] = JSON.parse(jsonString)
+import { PlayerExt,GoodWPriceExt,OutputPairing, Color } from "./objects";
+import { hexToRgb } from "./helpers";
+export {ResultObject}
+
   // Assuming you have the parsedData array from the previous step
   
+  
+
+  interface ResultObject{
+    html : string,
+    auction_result : OutputPairing[],
+    input_matrix : [number,number | null,number][]
+  }
+
+  
+
   // Interface for the row data with the required fields
   interface TableRow {
     playerName: string;
     goodName: string;
     price: number;
-    goodColor: string;
+    goodColor: Color;
   }
 
 
@@ -55,7 +28,7 @@ const dummy_data : OutputPairing[] = JSON.parse(jsonString)
         playerName: pl.name,
         goodName: good_color_price.good.name,
         price: good_color_price.price.val,
-        goodColor: good_color_price.good.color.str,
+        goodColor: good_color_price.good.color,
         }
     }
 
@@ -64,7 +37,7 @@ const dummy_data : OutputPairing[] = JSON.parse(jsonString)
             playerName: pl.name,
             goodName: 'none',
             price: 0,
-            goodColor: 'gray',
+            goodColor: {str: 'gray'},
         }
     }
     
@@ -77,21 +50,26 @@ const dummy_data : OutputPairing[] = JSON.parse(jsonString)
   // Function to create a row dynamically based on TableRow data with a fade-in effect
   function createRow(rowData: TableRow): HTMLTableRowElement {
     const row = document.createElement('tr');
-  
-    const playerNameCell = document.createElement('td');
+
+    const font_col : Color = font_color_from_bg(rowData.goodColor)
+    
+    const playerNameCell : HTMLTableCellElement= document.createElement('td');
     playerNameCell.textContent = rowData.playerName;
+    playerNameCell.style.color = font_col.str
     row.appendChild(playerNameCell);
   
-    const goodNameCell = document.createElement('td');
+    const goodNameCell : HTMLTableCellElement = document.createElement('td');
     goodNameCell.textContent = rowData.goodName;
+    goodNameCell.style.color = font_col.str
     row.appendChild(goodNameCell);
   
-    const priceCell = document.createElement('td');
+    const priceCell : HTMLTableCellElement = document.createElement('td');
     priceCell.textContent = rowData.price.toString();
+    priceCell.style.color = font_col.str
     row.appendChild(priceCell);
   
     // Apply the color value directly to the background color of the row
-    row.style.backgroundColor = rowData.goodColor;
+    row.style.backgroundColor = rowData.goodColor.str;
   
     // Add the "fade-in" class to the row to trigger the fade-in effect
     setTimeout(() => {
@@ -125,5 +103,18 @@ const dummy_data : OutputPairing[] = JSON.parse(jsonString)
     }
   }
   
+  export function displayResult(res_obj : ResultObject) {
+    
+      document.body.innerHTML = res_obj.html;
+      createResultRows(res_obj.auction_result);
+      
+      // Process the response from the server
+    
+  }
+
+  function font_color_from_bg( bg : Color) : Color{
+    const rgb : [number,number,number] = hexToRgb(bg) ?? [255,255,255];
+    if ((rgb[0]*0.299 + rgb[1]*0.587 + rgb[2]*0.114) > 186){return {str : "#000000"}} else {return {str : "#FFFFFF"}}
+  }
   // Call the createRows function with the parsedData array to create rows with a delay
   

@@ -23,10 +23,8 @@ pub fn vcg_routine(bid_info : ClientBidInfo) -> VCGOutputContent{
     let output = vcg_auction.perform_vcg();
 
     let output_buffer = bid_info.metadata.pairings_int_to_ext(&mut output.into_buffer());
-    println!("buffer bef  processing {:?}",output_buffer);
-
+    
     let output_buff_processed = VCGPostProcessor::new(true,output_buffer,&bid_info).process();
-    println!("buffer is now {:?}",output_buff_processed);
     VCGOutputContent{id, output : output_buff_processed}
     
 }
@@ -40,6 +38,7 @@ pub struct VCGOutputContent{
 
 #[cfg(test)]
 mod vcg_auction_tests {
+    use itertools::Itertools;
     use tinyvec::{tiny_vec, TinyVec};
     use vcg_auction::iterator_as::IntoIteratorAsTr;
     use vcg_auction::vcg_base_types::{Player,Good,Price, Pairing};
@@ -61,10 +60,35 @@ mod vcg_auction_tests {
         let vec = vec![x];
         let vcgout = VCGOutputContent{ id : ID::new_random(),output : vec};
         let z = serde_json::to_string(&vcgout);        
-        println!("{}",z.unwrap())
+    }
+
+    pub fn is_sorted<T: IntoIterator>(t: T) -> bool
+    where<T as IntoIterator>::Item: std::cmp::PartialOrd,
+    {
+        let mut iter = t.into_iter();
+        if let Some(first) = iter.next() 
+        {
+            iter.try_fold(first, |previous, current| 
+            {
+                (previous <= current).then_some(current)
+            })
+            .is_some()
+        } else {
+            true
+        }
     }
 
     
+    #[test]
+    fn is_sorted_works() {
+        assert!(is_sorted(vec![2,3,4,5,5,6,7,8,9]));
+        assert!(!is_sorted(vec![3,2,4,5,6,7,8,9]));
+        assert!(!is_sorted(vec![2,3,4,5,6,1,8,9]));
+
+    }
+
+
+
     #[test]
     fn test_auction_goods() {
         let (id,pls,good,pairs) = get_test_data_valid();
@@ -75,7 +99,8 @@ mod vcg_auction_tests {
             pls,
             bid_pairings : pairs,
         };
-        let client_bid_info = ClientBidInfo::try_from(content).unwrap();
+
+        let (client_bid_info,_bids) = content.validate_and_unpack().unwrap();
         let output = vcg_auction_routine::vcg_routine(client_bid_info);
         let output_pl_ids : Vec<(usize,Option<usize>)> = output.output.iter().map(|x| {
             match &x.good_color_price {
@@ -127,7 +152,7 @@ mod vcg_auction_tests {
             pls : inp.1,
             bid_pairings : inp.3,
         };           
-        let client_bid_info = ClientBidInfo::try_from(content).unwrap();
+        let (client_bid_info,_bids) = content.validate_and_unpack().unwrap();
         let output = vcg_auction_routine::vcg_routine(client_bid_info);        
         check_vec(output.output, out_exp)
     }
@@ -161,9 +186,44 @@ mod vcg_auction_tests {
             pls : inp.1,
             bid_pairings : inp.3,
         };           
-        let client_bid_info = ClientBidInfo::try_from(content).unwrap();
+        let (client_bid_info,_bids) = content.validate_and_unpack().unwrap();
         let output = vcg_auction_routine::vcg_routine(client_bid_info);        
-        println!("{:?}",output.output);
+        check_vec(output.output, out_exp)
+    }
+
+
+    #[test]
+    fn test_auction_order_bids() {
+        let (inp,out_exp) = generate_test_data(
+            (1..=4).rev().collect(),
+            (3..=7).rev().collect(),
+            vec![
+                4,2,6,4,8,
+                5,7,3,2,0,
+                7,6,0,2,0,
+                5,7,0,4,0,
+            ],
+            vec![
+                (1,Some(4),0),
+                (2,Some(7),1),
+                (3,Some(6),3),
+                (4,Some(3),0),
+
+            ],
+             false);
+        
+
+        let content = BidPostBackContent{
+            id : inp.0,
+            player_nr : inp.1.len() as u64,
+            goods: inp.2,
+            pls : inp.1,
+            bid_pairings : inp.3,
+        };           
+        let (client_bid_info,bids) = content.validate_and_unpack().unwrap();
+        assert!(is_sorted(bids.as_ref()));
+        assert!(is_sorted(&client_bid_info.bid_buffer));
+        let output = vcg_auction_routine::vcg_routine(client_bid_info);        
         check_vec(output.output, out_exp)
     }
 
@@ -197,9 +257,8 @@ mod vcg_auction_tests {
             pls : inp.1,
             bid_pairings : inp.3,
         };           
-        let client_bid_info = ClientBidInfo::try_from(content).unwrap();
+        let (client_bid_info,_bids) = content.validate_and_unpack().unwrap();
         let output = vcg_auction_routine::vcg_routine(client_bid_info);        
-        println!("{:?}",output.output);
         check_vec(output.output, out_exp)
     }
 
@@ -231,9 +290,8 @@ mod vcg_auction_tests {
             pls : inp.1,
             bid_pairings : inp.3,
         };           
-        let client_bid_info = ClientBidInfo::try_from(content).unwrap();
+        let (client_bid_info,_bids) = content.validate_and_unpack().unwrap();
         let output = vcg_auction_routine::vcg_routine(client_bid_info);        
-        println!("{:?}",output.output);
         check_vec(output.output, out_exp)
     }
 

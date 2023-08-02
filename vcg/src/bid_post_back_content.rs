@@ -13,4 +13,3 @@ pub struct BidPostBackContent {
     pub bid_pairings: Vec<(usize, Option<usize>, usize)>,
 }
 
-impl BidPostBackContent {}

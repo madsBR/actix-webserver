@@ -25,7 +25,6 @@ impl<'a> VCGPostProcessor<'a>{
         let leftover_goods_nr = self.cli_info.metadata.players_total.len()- self.vcg_output.len();
         let mut assigns_remaining = leftover_goods_nr.min(leftover_pls_nr); 
         let mut leftover_goods = self.get_leftover_goods();
-        println!("leftover goods are {:?}",leftover_goods);
         leftover_goods.shuffle(&mut thread_rng());
         let mut inp_pls = self.cli_info.metadata.players_total.iter();
         while assigns_remaining>0 {
@@ -38,7 +37,6 @@ impl<'a> VCGPostProcessor<'a>{
     }
     
     fn assign(&mut self, pl : &PlayerExt, good: &GoodExt,assign_counter : &mut usize){
-        println!("assigning {:?} to {:?}",pl,good);
         self.vcg_output.push(OutputPairing { pl: pl.clone(), good_color_price: Some(GoodWPriceExt{good : good.clone(), price : 0.into()}) });
         *assign_counter-=1;
     }
@@ -71,6 +69,7 @@ mod vcg_auction_tests {
     use tinyvec::{tiny_vec, TinyVec};
     use vcg_auction::iterator_as::IntoIteratorAsTr;
     use vcg_auction::vcg_base_types::{Player,Good,Price, Pairing};
+    use std::rc::Rc;
     use std::vec::Vec;
     use std::vec;
     use crate::ext_types::{self, ID, PlayerExt, GoodExt,Color, OutputPairing};
@@ -78,6 +77,7 @@ mod vcg_auction_tests {
     use crate::client_bid_info::ClientBidInfo;
     use crate::test_data::test_utils::{get_test_data_bad_good, check_vec, get_test_data_valid,generate_test_data};
     use crate::vcg_auction_postprocessor::VCGPostProcessor;
+    use crate::client_bid_info::ContentMetaData;
     #[test]
     fn test_postprocess() {
         
@@ -109,10 +109,14 @@ mod vcg_auction_tests {
             goods: inp.2,
             pls : inp.1,
             bid_pairings : inp.3,
-        };           
-        let client_bid_info = ClientBidInfo::try_from(content).unwrap();
-        let post_proc : Vec<OutputPairing> = VCGPostProcessor { distribute_leftovers: true, vcg_output: out_bef_proc.clone(), cli_info: &client_bid_info }.process();
-    
+        };
+        let BidPostBackContent{id,player_nr,goods,pls,bid_pairings} = content;
+        let bids = Rc::new(bid_pairings);
+        let metadata_mb = ContentMetaData::from_content_vals(&bids,pls,goods);     
+        assert!(metadata_mb.is_ok());
+        let metadata = metadata_mb.unwrap();
+        let client_bid_info = ClientBidInfo::new(metadata, &bids, id);
+        let post_proc : Vec<OutputPairing> = VCGPostProcessor { distribute_leftovers: true, vcg_output: out_bef_proc.clone(), cli_info: &client_bid_info }.process();    
 
         assert!(out_bef_proc.iter().all(|elem_bef_proc|post_proc.contains(elem_bef_proc)));
         assert!(post_proc.iter().any(|pair| pair.pl.id == 0 && pair.good_color_price.as_ref().is_some_and(|x| x.good.id == 2)));

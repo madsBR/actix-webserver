@@ -2,15 +2,13 @@ ARG branch=TEST
 
 FROM node:14-alpine AS static_env
 WORKDIR /build
-COPY actix-engine/engine/static ./static
 COPY actix-engine/engine/package.json actix-engine/engine/package-lock.json actix-engine/engine/webpack.config.js actix-engine/engine/tsconfig.json ./
 RUN npm install webpack --yes && npm install webpack-cli --yes && npm install typescript && npm install ts-loader && npm install --production
 # Copy only package files and install dependencies
 
-
 FROM static_env AS static_builder
 WORKDIR /build
-
+COPY actix-engine/engine/static ./static
 RUN npm run build --production
 
 

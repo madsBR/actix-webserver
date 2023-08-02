@@ -1,4 +1,4 @@
-import { NULL_GOOD, GoodExt, goods, NULL_GOOD_INDEX } from './objects';
+import { NULL_GOOD, GoodExt, goods, NULL_GOOD_INDEX, Color } from './objects';
 
 export function is_null_good(good: GoodExt): boolean {
   return good === NULL_GOOD;
@@ -101,4 +101,14 @@ export function getPushBackUrl(): string {
   }
 }
 
+
+
+export function hexToRgb(hex : Color) : [number,number,number] | null  {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex.str);
+  return result ? [
+    parseInt(result[1], 16),
+    parseInt(result[2], 16),
+    parseInt(result[3], 16)
+   ] : null;
+}
 window.validateInput = validateInput;

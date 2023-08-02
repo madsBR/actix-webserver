@@ -1,32 +1,23 @@
+use std::rc::Rc;
 
 use actix_web::web::{ServiceConfig};
 use actix_web::{get,post, HttpResponse, Responder};
-
-
-
 use app_plugin::AppPlugin;
 use async_trait::async_trait;
-
-use crate::bid_post_back_content::BidPostBackContent;
-
-use crate::vcg_auction_routine::{vcg_routine};
-use crate::client_bid_info::ClientBidInfo;
-use crate::scope::SCOPE;
-
-
-
-
-use crate::result_page::{VCGResultTemplate};
 use askama::Template;
 
-
-
+use crate::bid_post_back_content::BidPostBackContent;
+use crate::result_object::ResultObject;
+use crate::vcg_auction_routine::{vcg_routine};
+use crate::client_bid_info::{ClientBidInfo, ContentMetaData};
+use crate::scope::{SCOPE,ROOT_REDIR};
+use crate::result_page::{VCGResultTemplate};
 use crate::index_template::IndexTemplate;
 
 
 
 pub struct VcgAppConfig{}
-const ROOT_REDIR : &str = "app";
+
 #[get("/app")]
 async fn app() -> impl Responder {
     let page = IndexTemplate::new(SCOPE).render();    
@@ -47,21 +38,28 @@ MAYBE: If player in pls vector then pls should get assigned a good as if plaer b
 */
 #[post("/app/submit_bids")]
 async fn submit_bids(content : String) -> impl Responder {
-    println!("content receieved : {}",content);
+    log::debug!("content receieved : {}",content);
     let content: BidPostBackContent = serde_json::from_str(&content).unwrap();
-    log::debug!("received bids {:?}",content);
-    match ClientBidInfo::try_from(content){
-        Ok(cli_bid_info) => {    
+    match content.validate_and_unpack(){
+        Ok((client_bid_info,bids)) => {
             log::debug!("succesfully formatted postback into client bid info");
-        let resp_content = vcg_routine(cli_bid_info);
-            let page_result = VCGResultTemplate::new().render();
-            let response = match page_result{
-            Ok(page) => HttpResponse::Ok().body(page),
-            _ => HttpResponse::InternalServerError().into(),
-            };
-            log::debug!("responding {:?}",response);
-            response
-        }
+            let resp_content = vcg_routine(client_bid_info);
+                let page_result = VCGResultTemplate::new().render();
+                let response = match page_result{
+                Ok(page) => {
+                    let res : ResultObject = ResultObject{
+                        html : page,
+                        auction_result : resp_content.output,
+                        input_matrix : bids.to_vec(),
+                        };
+                    HttpResponse::Ok().json(res)
+                    }
+                _ => HttpResponse::InternalServerError().into()
+                };
+
+                    log::debug!("responding {:?}",response);
+                    response
+        } 
         Err(str) => {
             log::debug!("Failed to translate postback content to client bid info");
             HttpResponse::BadRequest().body(str)
