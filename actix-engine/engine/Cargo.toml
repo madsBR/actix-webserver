@@ -16,6 +16,7 @@ async-trait = "*"
 app_plugin = { path = "../../app_plugin" }
 homepage = { path = "../../homepage" }
 vcg = { path = "../../vcg" }
+InstaTokTiFace = { path = "../../InstaTokTiFace" }
 rand = "*"
 env_logger = "*"
 log4rs = "*"

@@ -1,0 +1,17 @@
+{% extends "frame.html" %}
+
+{% block title %}My Homepage{% endblock %}
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="/{{scope}}/static/styles/styles.css">
+{% endblock %}  
+
+{% block content %}
+<main class="grid">
+  <img src="/{{scope}}/static/base_imgs/rustlogo.png" alt="Sample photo1">
+  <img src="/{{scope}}/static/base_imgs/rustlogo.png" alt="Sample photo2">
+  <img src="/{{scope}}/static/base_imgs/rustlogo.png" alt="Sample photo3">
+  <img src="/{{scope}}/static/base_imgs/rustlogo.png" alt="Sample photo4">
+  <img src="/{{scope}}/static/base_imgs/rustlogo.png" alt="Sample photo5">
+  <img src="/{{scope}}/static/base_imgs/rustlogo.png" alt="Sample photo6">
+</main>
+{% endblock %}

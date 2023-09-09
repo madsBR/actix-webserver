@@ -18,6 +18,7 @@ use app_plugin::AppPlugin;
 use async_trait::async_trait;
 use homepage::HPConfig;
 use vcg::VcgAppConfig;
+use InstaTokTiFace::insta_plugin::InstaConfig;
 use log::{log_enabled,info};
 use std::env;
 use std::fmt::format;
@@ -45,11 +46,6 @@ async fn ping() -> impl Responder {
 }
 
 
-trait MyTrait {
-    fn my_function(&self);
-}
-
-
 macro_rules! add_plugins_to_app {
     ($app:expr, $($list_ty:ty),*) => {
         $(
@@ -70,7 +66,8 @@ async fn main() -> std::io::Result<()> {
         .service(web::redirect("/",format!("/{}/{}",HPConfig::SCOPE,HPConfig::ROOT_REDIR)));          //MAIN PAGE If just going to www.madsraad.com/*
         add_plugins_to_app!(app,
             HPConfig,
-            VcgAppConfig
+            VcgAppConfig,
+            InstaConfig
         );        
         app
     })
