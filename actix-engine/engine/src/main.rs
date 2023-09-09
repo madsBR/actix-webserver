@@ -46,19 +46,35 @@ async fn ping() -> impl Responder {
 }
 
 
+trait MyTrait {
+    fn my_function(&self);
+}
+
+
+macro_rules! add_plugins_to_app {
+    ($app:expr, $($list_ty:ty),*) => {
+        $(
+               $app = $app.configure(<$list_ty>::config_w_files); // Create an instance of the type  
+        )*
+    };
+}
 
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {    
-
     configure_log();
     info!("Initializing web server");
     HttpServer::new(|| {
+        let mut app = 
         App::new()
         .wrap(mw::NormalizePath::new(mw::TrailingSlash::Trim))
-        .service(web::redirect("/",format!("/{}/{}",HPConfig::SCOPE,HPConfig::ROOT_REDIR))) //MAIN PAGE If just going to www.madsraad.com/*
-        .configure(HPConfig::config_w_files)
-        .configure(VcgAppConfig::config_w_files) 
+        .service(web::redirect("/",format!("/{}/{}",HPConfig::SCOPE,HPConfig::ROOT_REDIR)));
+        add_plugins_to_app!(app,
+            HPConfig,
+            VcgAppConfig
+        );        
+         //MAIN PAGE If just going to www.madsraad.com/*
+        app
     })
     .bind(("0.0.0.0", 8080))?
     .run()
