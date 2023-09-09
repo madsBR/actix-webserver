@@ -9,7 +9,6 @@
     clippy::redundant_field_names,
 )]
 
-
 use actix_web::web::{Data, ServiceConfig,scope};
 use actix_web::{middleware as mw,get,post, web::{self,ReqData, Json,Redirect,redirect}, App, HttpResponse, HttpServer, Responder};
 use image::{ImageFormat,load_from_memory_with_format};
@@ -68,12 +67,11 @@ async fn main() -> std::io::Result<()> {
         let mut app = 
         App::new()
         .wrap(mw::NormalizePath::new(mw::TrailingSlash::Trim))
-        .service(web::redirect("/",format!("/{}/{}",HPConfig::SCOPE,HPConfig::ROOT_REDIR)));
+        .service(web::redirect("/",format!("/{}/{}",HPConfig::SCOPE,HPConfig::ROOT_REDIR)));          //MAIN PAGE If just going to www.madsraad.com/*
         add_plugins_to_app!(app,
             HPConfig,
             VcgAppConfig
         );        
-         //MAIN PAGE If just going to www.madsraad.com/*
         app
     })
     .bind(("0.0.0.0", 8080))?

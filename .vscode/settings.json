@@ -2,6 +2,7 @@
     "rust-analyzer.linkedProjects": [
         "./vcg/Cargo.toml",
         "./homepage/Cargo.toml",
+        "./InstaTokTiFace/Cargo.toml",
         "./actix-engine/Cargo.toml",
         "./actix-engine/engine/Cargo.toml",
     ]
